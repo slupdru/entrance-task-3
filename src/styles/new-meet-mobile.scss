@@ -1,0 +1,138 @@
+@media screen and (max-width: 900px) {
+    .nmeet-container{
+        width: 90%;
+    }
+    .theme-line, .time, .theme, .date_input, .start-block_input, .members, .select-room{
+        width: 100%;
+    }
+    .start-end{
+        width: 50%;
+    }
+    .date_input{
+        margin-right: 0px;
+    }
+    .date{
+        margin-right: 15px;
+    }
+    .members-line .nmeet-container{
+        width: 100%;
+    }
+    .members-line .nmeet-container:nth-of-type(1){
+        margin-right: 32px;
+    }
+}
+
+@media screen and (max-width: 708px) {
+    .main-new-meet>.nmeet-container{
+        width: 100%;
+        background: white;
+    }
+    .members-line .nmeet-container:nth-of-type(1){
+        margin-right: auto;
+    }
+    .members-line .nmeet-container{
+        width: 328px;
+    }
+    .header_container.header_container_meet{
+        margin-top: 15.8px;
+        margin-bottom: 12.3px;
+    }
+    .header_logo{
+        width:149px;
+        height: 20.9px;
+        margin-left: 20.5px;
+    }
+    .body-new-meet{
+        height: auto;
+    }
+    .main_background:nth-of-type(1){
+        background: white;
+    }
+    .main-new-meet{
+        background: #E9ECEF;
+    }
+    input{
+        font-size: 15px;
+    }
+    .nmeet-container{
+        width: 328px;
+    }
+    .theme-line, .time, .members-line{
+        flex-direction: column;
+    }
+    .title-line_exit-button{
+        display: none;
+    }
+    .theme, .members{
+        margin-right:0px;
+    }
+    .start-end_separator>span{
+        transform: translateY(-10px);
+    }
+    .start-end{
+        width: 100%;
+        margin-top:8px;
+    }
+    .title-line{
+        margin-bottom: 0px;
+    }
+    .theme, .date, .members, .select-room{
+        margin-top:16px;
+    }
+    .start-end .theme_title{
+        display: none;
+    }
+    .theme-line{
+        margin-bottom: 20px;
+    }
+    .main_background{
+        margin-bottom: 8px;
+    }
+    .date{
+        margin-right: 0px;
+    }
+    .members-line_line{
+        background: #E9ECEF;
+        height: 8px;
+        width: 100%;
+    }
+    .members{
+        margin-bottom: 20px;
+    }
+    .footer-new-meet{
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        height: 123px;
+        flex-direction: column;
+        background: white;
+    }
+    .message-line{
+        display: flex;
+    }
+    .buttons-container_cancel{
+        display: none;
+    }
+    .buttons-container{
+        height: 80px;
+    }
+    .header_button{
+        margin-top: 16px;
+        width: 238px;
+        height: 44px;
+        line-height: 44px;
+        font-size: 15px;
+    }
+    .main-new-meet{
+        margin-bottom: 141px;
+    }
+   }
+
+   @media screen and (max-width: 328px) {
+    .nmeet-container{
+        width: 100%;
+    }
+    .members-line .nmeet-container{
+        width: 100%;
+    }
+   }

@@ -1,0 +1,64 @@
+.buttons-container_delete, .buttons-container_save {
+    background: #E9ECEF;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 36px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0;
+    user-select: none;
+    color: black;
+    text-decoration: none;
+}
+.buttons-container_delete:hover, .buttons-container_save:hover{
+    background: rgba(0,16,33,0.05);
+}
+.buttons-container_delete:active, .buttons-container_save:active{
+    background: rgba(4,29,56,0.14);
+}
+.buttons-container_delete:disabled, .buttons-container_save:disabled, .buttons-container_cancel:disabled{
+    background: #E2E5E8;
+    color: rgba(0,0,0,0.20);
+}
+.buttons-container_delete{
+    width: 140px;
+    height: 36px;
+    margin-right: 16px;
+}
+.buttons-container_cancel{
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+}
+.buttons-container_save{
+    width: 101px;
+    height: 36px;
+}
+.theme_input-con{
+position: relative;
+}
+.theme_close-icon{
+    position: absolute;
+    right: 14px;
+    top: 13.4px;
+}
+.delete-line{
+    display: none;
+}
+.modal-new-meet.modal-delete .modal-new-meet_panel{
+height: 230px;
+}
+.modal-new-meet.modal-delete .modal-new-meet_title:first-of-type{
+margin-bottom: -4px;
+}
+.modal-new-meet_title:last-of-type{
+    margin-bottom: 23px;
+    }
+.modal-new-meet.modal-delete .buttons-container_cancel:last-of-type{
+    width: 86px;
+    margin-right: 0px;
+}
+.modal-new-meet.modal-delete .buttons-container_cancel:first-of-type{
+    margin-bottom: 9px;
+}

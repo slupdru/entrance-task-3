@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
 import './styles/styles.scss'
+import './styles/style-mobile.scss'
 import Header from './components/Header'
 import Timebar from './components/Timebar';
 import MainContainer from './components/MainContainer';

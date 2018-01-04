@@ -8,7 +8,10 @@ function FloorRow(props){
         </div>
         <div className="floor_row floor_row-tablet">
                   <div className="floor_mobile-title">{props.roomTitle}</div>
-                  <div className="table-hour_1-block dark"></div>
+                  <div className="table-container-hour">
+                    <div className="table-hour_1-block dark"></div>
+                    <a href="new-meet.html" className="floor_button floor_button_button-line1"><span>+</span></a>
+                  </div>
               </div>
       </div>
     )

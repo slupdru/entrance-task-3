@@ -38,6 +38,35 @@ $gray-line:#E9ECEF ;
     font-weight: 500;
     margin-right:24px;
   }
+  .header_button:hover, .modal-new-meet_button:hover{
+    background: #0059FF;
+  }
+  .header_button:active, .modal-new-meet_button:active{
+    background: #0B00FF;
+  }
+  .header_button:disabled, .modal-new-meet_button:disabled{
+    background: #E9ECEF;
+  }
+  .floor_button{
+    position: relative;
+    width: 100%;
+    font-size: 25px;
+    background: #2B50FD;
+    border-radius: 2px;
+    cursor:pointer;
+    user-select: none;
+  }
+  .floor_button:active{
+    background: #1D00FE;
+  }
+  .floor_button>span{
+   position: absolute;
+   top:50%;
+   left: 50%;
+  transform: translate(-50%, -20px);
+   color: white;
+  }
+  
   .header_logo{
     margin-left:24.6px;
     transform: translateY(1px)
@@ -200,9 +229,16 @@ $gray-line:#E9ECEF ;
       flex-shrink: 0;
       z-index: 1;
   }
+  .table-container-hour{
+    position: relative;
+    width: 100%;
+    height: 28px;
+    background: white;
+  }
   .table-hour_1-block.dark{
-      width: 100%;
-      height: 28px;
+      width: 50%;
+      height: 100%;
+      position: absolute;
       background: $gray-complite-cells;
   }
   .floor_row.floor_row-tablet{

@@ -1,0 +1,174 @@
+*{
+    box-sizing: border-box;
+}
+.body-new-meet{
+    height: 100vh;
+    flex-direction: column;
+}
+.body-new-meet, .main-new-meet, .title-line, .title-line_exit-button, .theme-line,
+.time, .start-end, .start-end_separator, .members-line, .footer-new-meet, .buttons-container,
+.select-room_roomblock{
+    display: flex;
+}
+.header_container.header_container_meet{
+    margin-top:25px;
+    margin-bottom: 21.6px;
+}
+.main-new-meet{
+    box-shadow: 0 -1px 0 0 #E9ECEF;
+    flex-grow: 1;
+    flex-direction: column;
+}
+.start-end_separator>span{
+    margin: auto;
+    font-weight:lighter;
+    font-size: 37px;
+    transform: translateY(5px);
+}
+.nmeet-container{
+    width: 876px;
+    margin: 0 auto;
+}
+.title-line{
+    margin-top:31px;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.title-line_exit-button{
+    width: 24px;
+    height: 24px;
+    background: #E9ECEF;
+    border-radius: 100px;
+    cursor: pointer
+}
+.title-line_exit-button img{
+    margin: auto;
+}
+.theme, .time, .members, .select-room{
+    width: 420px;
+}
+.theme,.members{
+    margin-right: 32px;
+}
+.theme_input, .members_input{
+    width: 100%;
+}
+input{
+    height: 38px;
+    border: 2px solid #E9ECEF;
+    border-radius: 4px;
+    padding-left: 10px;
+    outline: none;
+    
+}
+input:hover{
+    border: 2px solid #007DFF;
+}
+input::placeholder{
+    font-size: 13px;
+    color: #858E98;
+    letter-spacing: 0.47px;
+}
+.theme_title{
+    font-size: 13px;
+    letter-spacing: 0;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+.date_input{
+    width: 238px;
+    margin-right: 16px;
+    background-image: url(../assets/calendar.svg);
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+}
+
+.start-end_separator{
+    margin: 0px 4px;
+}
+.start-block_input{
+    width: 72px;
+}
+.theme-line{
+    margin-bottom: 24px;
+}
+.footer-new-meet{
+    height: 76px;
+    box-shadow: 0 -1px 0 0 #E9ECEF;
+}
+.buttons-container{
+    margin: auto;
+}
+.buttons-container_cancel{
+    background: #E9ECEF;
+    border-radius: 4px;
+    width: 80px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    margin-right: 16px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0;
+    user-select: none;
+}
+.buttons-container_cancel:hover{
+    background: rgba(0,16,33,0.05);
+}
+.buttons-container_cancel:active{
+    background: rgba(4,29,56,0.14);
+}
+.buttons-container_cancel:disabled{
+    background: #E2E5E8;
+    color: rgba(0,0,0,0.20);
+}
+.select-room_roomblock{
+    height: 37px;
+    background: #E9ECEF;
+    border-radius: 4px;
+    margin-top: 8px;
+    cursor: pointer;
+    position: relative;
+}
+.select-room_time{
+    font-size: 13px;
+    letter-spacing: 0;
+    font-weight: bold;
+    margin-right: 16px;
+}
+.select-room_room{
+    font-size: 13px;
+    letter-spacing: 0;
+}
+.select-room_container{
+    margin: auto 10px;
+}
+.selct-room_icon{
+    position: absolute;
+    right: 15.4px;
+    top: 14.4px;
+    display: none;
+}
+.members-line .nmeet-container{
+    width: auto;
+}
+
+.message-line_message{
+    font-size: 15px;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin:auto 16px;
+}
+
+.message-line{
+    background: rgba(0,16,33,0.80);
+    opacity: 0.93;
+    height: 43px;
+    display: none;
+}
+.header_button{
+    margin-right: 0px;
+}

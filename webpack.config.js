@@ -32,7 +32,11 @@ module.exports = {
         ]
     },
     devtool: 'eval-source-map',
-
+    devServer: {
+        proxy:{
+            "/graphql": "http://localhost:3000"
+        }
+    },
     resolve: {
         extensions: ['.js', '.jsx']
     }
