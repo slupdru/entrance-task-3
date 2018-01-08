@@ -55,10 +55,23 @@
 .theme_input, .members_input{
     width: 100%;
 }
-input.input_valid_err{
+.input_valid_err{
+    position: relative;
+}
+.input_error{
+    position: absolute;
+    font-size: 9px;
+    color: #ff3860;
+    display: none;
+}
+.input_valid_err .input_error{
+    display: block;
+}
+.input_valid_err input{
     border: 2px solid #ff3860;
 }
-input.input_valid_err:hover{
+
+.input_valid_err input:hover{
     border: 2px solid #ff3860;
 }
 input{

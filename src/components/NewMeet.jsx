@@ -45,14 +45,16 @@ class NewMeet extends React.Component{
         super(props);
     this.state ={
         themeInput:'',
+        themeValid:false,
         dateInput:' 7 января, 2018',
-        dateValid:false,
+        dateValid:true,
         startInput:'',
         startValid:false,
         endInput:'',
         endValid:false,
         membInput:'',
-        usersInNewMeet:[]
+        usersInNewMeet:[],
+        showError:false
     }
     this.handleChange = this.handleChange.bind(this);
     this.getRecomendation = this.getRecomendation.bind(this);
@@ -60,6 +62,7 @@ class NewMeet extends React.Component{
     this._handleKeyPress=this._handleKeyPress.bind(this);
     this.sortR=this.sortR.bind(this);
     this.startEndValidation=this.startEndValidation.bind(this);
+    this._showError=this._showError.bind(this);
 }
     componentWillMount(){
     let dayNow = new Date().getDate();
@@ -77,6 +80,18 @@ class NewMeet extends React.Component{
         this.setState({
             dateInput:fullDate
         })
+    }
+    _showError(){
+        if((this.state.dateValid===false)||(this.state.endValid===false)||(this.state.startValid===false)||(this.state.themeValid===false)||(this.state.usersInNewMeet.length===0)){
+            this.setState({
+                showError:true
+            })
+        }
+        else{
+            this.setState({
+                showError:false
+            })
+        }
     }
     _handleKeyPress(event){
         if (event.key === 'Enter') {
@@ -112,6 +127,17 @@ class NewMeet extends React.Component{
             case 'themeInput':{
                 this.setState({
                     themeInput:inpVal
+                }, ()=>{
+                    if (this.state.themeInput===''){
+                        this.setState({
+                            themeValid:false
+                        })
+                    }
+                    else{
+                        this.setState({
+                            themeValid:true
+                        })
+                    }
                 });
             }
             break;
@@ -166,6 +192,7 @@ class NewMeet extends React.Component{
             break;
         }
     }
+
     getUsers(){
         for (let i = 0; i < this.props.data.users.length; i++){
             if (this.state.membInput===this.props.data.users[i].login){
@@ -178,15 +205,16 @@ class NewMeet extends React.Component{
 
     }
     sortR(a,b){
-    let sumA = 0;
-    let sumB = 0;
-    for (let i = 0; i < this.state.usersInNewMeet.length; i++){
-        sumA+= Math.abs(a.floor - this.state.usersInNewMeet[i].homeFloor);
-        sumB+=Math.abs(b.floor - this.state.usersInNewMeet[i].homeFloor);
+        let sumA = 0;
+        let sumB = 0;
+        for (let i = 0; i < this.state.usersInNewMeet.length; i++){
+            sumA+= Math.abs(a.floor - this.state.usersInNewMeet[i].homeFloor);
+            sumB+=Math.abs(b.floor - this.state.usersInNewMeet[i].homeFloor);
+        }
+        if (sumA > sumB) return 1;
+        if (sumA < sumB) return -1;
     }
-    if (sumA > sumB) return 1;
-    if (sumA < sumB) return -1;
-}
+
     getRecomendation(){
         let start = new Date(new Date().getTime() + 1000*60*60*10);
         let end = new Date(start.getTime() + 1000*60*60*3);
@@ -215,7 +243,6 @@ class NewMeet extends React.Component{
     render(){
         if (!this.props.data.loading){
         let rooms = this.getRecomendation();
-
     return(
 <div className="body-new-meet">
     <main className={this.props.location.pathname===`/NewMeet`? `main-new-meet`: `main-new-meet main-edit-meet`}>
@@ -225,25 +252,29 @@ class NewMeet extends React.Component{
                 {this.props.location.pathname===`/NewMeet`?<div className="title-line_title">Новая встреча</div>:<div className="title-line_title">Редактирование встречи</div>}
                 <a className="title-line_exit-button"><img src="assets/close.svg" alt=""/></a>
             </div>
-            <div className="theme-line">
-                <div className="theme">
+            <div className="theme-line ">
+                <div className={((this.state.themeValid===true)||(this.state.themeInput==='')&&(this.state.showError===false))?`theme`:`theme input_valid_err`}>
                     <div className="theme_title">Тема</div>
-                    <input className="theme_input input_valid_err" id="themeInput" value={this.state.themeInput} onChange={this.handleChange} placeholder="О чём будете говорить?" type="text"/>
+                    <input className="theme_input" id="themeInput" value={this.state.themeInput} onChange={this.handleChange} placeholder="О чём будете говорить?" type="text"/>
+                    <div className="input_error">Поле не должно быть пустым</div>
                 </div>
                 <div className="time">
-                    <div className="date">
+                    <div className={((this.state.themeValid===true)||(this.state.themeInput==='')&&(this.state.showError===false))?`date`:`date input_valid_err`}>
                         <div className="theme_title">Дата</div>
                         <input className="date_input" id="dateInput" value={this.state.dateInput} onChange={this.handleChange} type="text"/>
+                        <div className="input_error">Формат даты (dd.mm.yyyy)</div>
                     </div>
                     <div className="start-end">
-                        <div className="start-block">
+                        <div className={((this.state.startValid===true)||(this.state.startInput==='')&&(this.state.showError===false))?`start-block`:`start-block input_valid_err`}>
                             <div className="theme_title">Начало</div>
                             <input className="start-block_input" id="startInput" value={this.state.startInput} onChange={this.handleChange} type="text"/>
+                            <div className="input_error">Формат времени (hh:mm)</div>
                         </div>
                         <div className="start-end_separator"><span>-</span></div>
-                        <div className="end-block">
+                        <div className={((this.state.endValid===true)||(this.state.endInput==='')&&(this.state.showError===false))?`end-block`:`end-block input_valid_err`}>
                             <div className="theme_title">Конец</div>
                             <input className="start-block_input" id="endInput"  onChange={this.handleChange} value={this.state.endInput} type="text"/>
+                            <div className="input_error">Формат времени (hh:mm)</div>
                         </div>
                     </div>
                 </div>
@@ -257,7 +288,8 @@ class NewMeet extends React.Component{
                     
                     <div className="members_input-block">
                         <div className="theme_title">Участники</div>
-                        <input id="members_input" id="membInput" onKeyPress={this._handleKeyPress} value={this.state.membInput} onChange={this.handleChange} className="members_input awesomplete"  type="text"/>
+                        <input className={((this.state.usersInNewMeet.length!==0)||(this.state.endInput==='')&&(this.state.showError===false))?`members_input-block`:`members_input-block input_valid_err`} id="membInput" onKeyPress={this._handleKeyPress} value={this.state.membInput} onChange={this.handleChange} className="members_input awesomplete"  type="text"/>
+                        <div className="input_error">Cписок не должен быть пуст</div>
                     </div>
                     <div className="members_show">
 
@@ -267,8 +299,8 @@ class NewMeet extends React.Component{
                 <div className="members-line_line"></div>
                 <div className="nmeet-container">
                 <div className="select-room">
-                    <div className="theme_title" onClick={this.getRecomendation}>Рекомендованные переговорки</div>
-                    {rooms.map((room)=><SelectRoomBlock key={room.id} id={room.id} title ={room.title} floor={room.floor} end={rooms.end} start={rooms.start}/>)}
+                    <div className="theme_title" onClick={this._showError}>Рекомендованные переговорки</div>
+                    {rooms.map((room)=><SelectRoomBlock  key={room.id} id={room.id} title ={room.title} floor={room.floor} end={rooms.end} start={rooms.start}/>)}
                 </div>
             </div>
         </div>
