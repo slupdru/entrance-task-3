@@ -1,5 +1,5 @@
 module.exports = {
-    entry:'./src/App.jsx',
+    entry:'./src/index.jsx',
     output:{
         filename: 'bundle.js',
         path: __dirname + '/public'
@@ -35,7 +35,8 @@ module.exports = {
     devServer: {
         proxy:{
             "/graphql": "http://localhost:3000"
-        }
+        },
+        historyApiFallback: true
     },
     resolve: {
         extensions: ['.js', '.jsx']

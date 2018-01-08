@@ -20,7 +20,6 @@ class Timebar extends React.Component{
     }
     
     tick(){
-        console.log(this.state);
         let NewDate = new Date(this.state.date.getTime() + minute);
         this.setState(
             {
@@ -31,6 +30,7 @@ class Timebar extends React.Component{
     render(){ 
         let dateMy = this.state.date;
         let hours = dateMy.getHours();
+        console.log(new Date(this.state.date.getTime()+1000*60*60*5));
         return(
             <div className="timebar">
                 <div className="timebar_main-container">

@@ -15,9 +15,9 @@ $gray-line:#E9ECEF ;
   }
   .header_container{
     display: flex;
-    padding-top: 18px;
+    padding-top: 25px;
     justify-content: space-between;
-    padding-bottom: 17px;
+    padding-bottom: 21.6px;
   }
   @mixin button{
     text-decoration: none;
@@ -26,7 +26,7 @@ $gray-line:#E9ECEF ;
     cursor: pointer;
     user-select: none;
   }
-  .header_button{
+  .header_button, .header_button-foo{
     @include button;
     width: 140px;
     font-size: 13px;
@@ -38,13 +38,13 @@ $gray-line:#E9ECEF ;
     font-weight: 500;
     margin-right:24px;
   }
-  .header_button:hover, .modal-new-meet_button:hover{
+  .header_button:hover, .modal-new-meet_button:hover, .header_button-foo:hover{
     background: #0059FF;
   }
-  .header_button:active, .modal-new-meet_button:active{
+  .header_button:active, .modal-new-meet_button:active, .header_button-foo:active{
     background: #0B00FF;
   }
-  .header_button:disabled, .modal-new-meet_button:disabled{
+  .header_button:disabled, .modal-new-meet_button:disabled, .header_button-foo:disabled{
     background: #E9ECEF;
   }
   .floor_button{
@@ -224,10 +224,18 @@ $gray-line:#E9ECEF ;
     border-radius: 4px;
     text-align: center;
   }
+  .modal-in-cell_ava{
+    height: 24px;
+    width: 24px;
+  }
   .room, .floor_name{
       width: 245px;
       flex-shrink: 0;
       z-index: 1;
+      transform: translateY(1px);
+  }
+  .floor:last-of-type{
+    padding-bottom: 22px;
   }
   .table-container-hour{
     position: relative;
@@ -235,20 +243,19 @@ $gray-line:#E9ECEF ;
     height: 28px;
     background: white;
   }
-  .table-hour_1-block.dark{
+  .meet-dark-block{
       width: 50%;
       height: 100%;
       position: absolute;
       background: $gray-complite-cells;
   }
+  .meet-dark-block:hover{
+    background:rgba(0,0,0,0.32);
+  }
   .floor_row.floor_row-tablet{
       width: 100%;
   }
-  .floor:first-of-type{
-    .floor_row:nth-of-type(2){
-        margin-top: 6px;
-    }
-  }
+
   .timebar_time{
     flex-grow: 1;
     margin-left: 25px;
@@ -267,6 +274,7 @@ $gray-line:#E9ECEF ;
       width: 100%;
       height: 100%;
       display: flex;
+      pointer-events: none;
       z-index: 3;
   }
   .linear-back_line{
@@ -282,3 +290,84 @@ $gray-line:#E9ECEF ;
       flex-grow: 1;
       display: flex;
   }
+  .modal-in-cell{
+    display: none;
+    left: -50%;
+    background: #FFFFFF;
+    box-shadow: 0 1px 16px 0 rgba(0,44,92,0.28);
+    border-radius: 8px;
+    width:338px;
+    height: 114.8px;
+    position: absolute;
+    top:28px;
+    left: 0;
+    transform: translateX(-45%);
+    z-index: 3;
+    }
+
+    .modal-in-cell::after{
+      content: ''; 
+      position: absolute;
+      left: 164px; top: -18px;
+      border: 8px solid transparent;
+      border-bottom: 10px solid white;
+    }
+    .modal-in-cell_closeicon{
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      height: 24px;
+      width: 24px;
+      background: #E9ECEF;
+      border-radius: 100px;
+      display: flex;
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .modal-in-cell_closeicon:hover img{
+      opacity: 1;
+    }
+    .modal-in-cell_closeicon img{
+      opacity: 0.43;
+    }
+    .modal-in-cell_closeicon>a{
+      margin: auto;
+    }
+    .modal-in-cell_title{
+      margin-top: 14.8px;
+      font-weight: bold;
+      font-size: 15px;
+      letter-spacing: 0;
+      line-height: 24px;
+      margin-bottom: 2px;
+    }
+  
+    .modal-in-cell_subtitle{
+      font-size: 13px;
+      letter-spacing: 0;
+      line-height: 17px;
+      margin-bottom: 18px;
+    }
+    .modal-in-cell_container{
+      margin-left: 16px;
+      font-size: 13px;
+      letter-spacing: 0;
+      line-height: 17px;
+    }
+    .modal-in-cell_users>img{
+      border-radius: 100%;
+      background: black;
+      margin-right: 8px;
+    }
+    .modal-in-cell_users{
+      display: flex;
+    }
+    .modal-in-cell_users>span{
+      transform: translateY(2px);
+    }
+    .modal-in-cell_users>span:nth-last-of-type(1){
+      color: #858E98;
+      margin-left: 2px;
+    }
+

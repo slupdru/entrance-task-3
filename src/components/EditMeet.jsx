@@ -2,22 +2,6 @@ import React from 'react';
 function EditMeet(props){
     return(
         <body className="body-new-meet">
-        <div className="modal-new-meet modal-delete">
-                <div className="modal-new-meet_panel">
-                    <div className="modal-new-meet_container">
-                        <img className="modal-new-meet_icon" src="assets/emoji1.svg" alt=""/>
-                        <div className="modal-new-meet_title">Встреча будет</div>
-                        <div className="modal-new-meet_title">удалена безвозвратно</div>
-                        <a className="buttons-container_cancel">Отмена</a>
-                        <a className="buttons-container_cancel">Удалить</a>
-                    </div>
-                </div>
-              </div>
-    <header>
-        <div className="header_container header_container_meet">
-          <img className="header_logo" src="assets/logo.svg" alt=""/>
-        </div>
-    </header>
     <main className="main-new-meet">
         <div className="main_background">
         <div className="nmeet-container">
