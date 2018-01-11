@@ -42,10 +42,10 @@ function DateNow(props) {
         break;                                                                                
         }
         if (dayNow === new Date().getDate()){
-            return <a className="timebar_date">{`${dayNow} ${month.substring(0,3)} · Сегодня`}</a>
+            return <a style={props.blue===true?{color:'rgb(0, 112, 224)'}:{}} onClick={props.clickDate} className="timebar_date">{`${dayNow} ${month.substring(0,3)} · Сегодня`}</a>
         }
         else{
-            return <a className="timebar_date">{ `${dayNow} ${month}`}</a>
+            return <a style={props.blue===true?{color:'rgb(0, 112, 224)'}:{}} onClick={props.clickDate} className="timebar_date">{ `${dayNow} ${month}`}</a>
         }
     }
 DateNow.propTypes = {

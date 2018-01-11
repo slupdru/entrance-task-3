@@ -8,10 +8,17 @@
     .leftbar{
         width: 181px;
     }
+    .main-container{
+        width: 1255px;
+    }
     .header_logo{
         width:149px;
         height: 20.9px;
         margin-left: 20.5px;
+    }
+    .scrollBlock{
+        width: 1221px;
+        overflow: auto;
     }
     .header_container{
         margin-top: 15.8px;
@@ -44,7 +51,7 @@
     .timebar_time-container{
         margin-top:9px;
         margin-bottom: 10px;
-        margin-left: 232px;
+        margin-left: 224px;
     }
 
     .timebar_main-container{
@@ -54,7 +61,7 @@
         flex-grow: 0;
         color: #262626;
         text-align: center;
-        margin-right: 51.6px;
+        margin-right: 53.7px;
     }
     .timebar_date-container.timebar_date-container-mobile{
         display: flex;
@@ -76,14 +83,30 @@
     .floor_row{
         margin-top: 2px;
     }
+    html{
+        background: #F6F7F9;
+    }
+    .header_container{
+        padding-top:15.8px;
+        margin-top: 0px;
+    }
     .room{
-        padding: 11px 0px;
+        padding: 11px 25px;   
+        background: white;
+    }
+    .room, .floor_name{
+        width: 181px;
+    }
+    .white-background{
+        width: 181px;
+        display: none;
     }
     .leftbar .floor_row{
         background: white;
     }
     .floor_row.floor_row-first{
         background: transparent;
+        height: 31px;
     }
     .floor_row.floor_row-first .floor_name{
         margin-top: 16px;
@@ -101,11 +124,15 @@
     .floor{
         flex-grow: 0;
     }
+    .timebar_time{
+        background: white;
+    }
+    
     .floor:nth-last-of-type(1){
-        padding-bottom: 0px;
+        padding-bottom: 40px;
     }
     .floor_row.floor_row-tablet{
-        margin-top:2px;
+        margin-top:0px;
     }
     .floor_row.floor_row-tablet.floor_row-first{
         margin-top:0px;
@@ -115,13 +142,12 @@
         margin-top: 0px;
     }
     .linear-back_cell, .linear-back, .table-container{
-        height: 614px;
     }
     .table-container{
         flex-grow: 0;
     }
     .linear-back_container{
-        margin-left: 0px;
+        margin-left: 202px;
     }
     .time-container_hours:last-child{
         margin-right: 0px;
@@ -146,6 +172,9 @@
         transform: translate(-50%, -50%);
 
     }
+    .timebar_time{
+        margin-left: 0px;
+    }
     .timebar_date-container{
         display: none;
       }
@@ -158,9 +187,8 @@
     .modal-in-cell{
         height: 136.8px;
         width: 360px;
-        position: fixed;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-65%, 0);
         z-index: 35;
 
     }

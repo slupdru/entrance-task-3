@@ -4,7 +4,7 @@ function ModalInCell(props){
 
     let dayNow = props.start.getDate();
     let month = props.start.getMonth();
-    let timeMeet = `${props.start.getHours()}:${props.start.getMinutes()}—${props.end.getHours()}:${props.end.getMinutes()}`
+    let timeMeet = `${props.start.getHours()}:${props.start.getMinutes()<10 ? `0${props.start.getMinutes()}`:`${props.start.getMinutes()}`} — ${props.end.getHours()}:${props.end.getMinutes()<10 ? `0${props.end.getMinutes()}`:`${props.end.getMinutes()}`}`
     switch (month) {
         case 0:
             month = "января"
@@ -49,12 +49,12 @@ function ModalInCell(props){
     return(
         <div style={meetBlockStyle} className="modal-in-cell">
             <div className="modal-in-cell_closeicon">
-                <a className = "link" src="edit-meet.html"><img className = "link" src="assets/edit.svg" alt=""/></a>
+                <a href="/EditMeet" className = "link" src="edit-meet.html"><img className = "link" src="assets/edit.svg" alt=""/></a>
             </div>
             <div className="modal-in-cell_container">
                 <div className="modal-in-cell_title">{props.title}</div>
                 <div className="modal-in-cell_subtitle">{`${dayNow} ${month},  ${timeMeet}  ·  ${props.nameRoom}`}</div>
-                <div className="modal-in-cell_users"><img src={props.FirstIcon} className='modal-in-cell_ava' alt=""/><span>{props.logInFirst}</span><span>{`и ${props.countOfUsers} участников`}</span></div>
+                <div className="modal-in-cell_users"><img src={props.FirstIcon} className='modal-in-cell_ava' alt=""/><span>{props.logInFirst}</span><span>{`и ${props.countOfUsers-1} участников`}</span></div>
             </div>
         </div>
     )

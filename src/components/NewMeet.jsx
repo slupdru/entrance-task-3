@@ -46,7 +46,7 @@ class NewMeet extends React.Component{
     this.state ={
         themeInput:'',
         themeValid:false,
-        dateInput:' 7 января, 2018',
+        dateInput:'',
         dateValid:true,
         startInput:'',
         startValid:false,
@@ -54,7 +54,13 @@ class NewMeet extends React.Component{
         endValid:false,
         membInput:'',
         usersInNewMeet:[],
-        showError:false
+        showError:false,
+        roomSelectedId:-1,
+        indexRoom:-1,
+        _month:0,
+        _dayNow:0,
+        _year:2018,
+
     }
     this.handleChange = this.handleChange.bind(this);
     this.getRecomendation = this.getRecomendation.bind(this);
@@ -63,36 +69,123 @@ class NewMeet extends React.Component{
     this.sortR=this.sortR.bind(this);
     this.startEndValidation=this.startEndValidation.bind(this);
     this._showError=this._showError.bind(this);
+    this.handleRoomClick=this.handleRoomClick.bind(this);
+    this.handleCloseClick=this.handleCloseClick.bind(this);
+    this.setDate=this.setDate.bind(this);
 }
     componentWillMount(){
     let dayNow = new Date().getDate();
     let month = new Date().getMonth();
-    if (String.valueOf(month).length===1){
+    this.setState({
+        _dayNow:dayNow,
+        _month:month
+    });
+    if (month<10){
         month = `${0}${month+1}`
     }
     else {
         month = month+1;
     }
-    if (String.valueOf(dayNow).length===1){
+    if (dayNow<10){
         dayNow = `${0}${dayNow}`
     }
         let fullDate = `${dayNow}. ${month}. 2018`
         this.setState({
             dateInput:fullDate
         })
+    if (window.location.hash!=''){
+            let pos1 = window.location.hash.indexOf('|', 0);
+            let pos2 = window.location.hash.indexOf('|', pos1+1);
+            let id = window.location.hash.slice(1,pos1);
+            let mob = window.location.hash.slice(pos1+1, pos2);
+            let left = window.location.hash.slice(pos2+1);
+            let hourStart;
+            let hourEnd;
+            let minutes;
+            if (mob==='0'){
+                left = left/6.450204524325996+7.5;
+                if (Math.floor(left)<10){
+                    hourStart = `0${Math.floor(left)}`
+                }
+                else{
+                    hourStart = `${Math.floor(left)}`
+                }
+                if (Math.floor(left+1)<10){
+                    hourEnd = `0${Math.floor(left)+1}`
+                }
+                else{
+                    hourEnd = `${Math.floor(left)+1}`
+                }
+            }
+            else{
+                left = (left/67.2)+7.2;
+                if (Math.floor(left)<10){
+                    hourStart = `0${Math.floor(left)}`
+                }
+                else{
+                    hourStart = `${Math.floor(left)}`
+                }
+                if (Math.floor(left+1)<10){
+                    hourEnd = `0${Math.floor(left)+1}`
+                }
+                else{
+                    hourEnd = `${Math.floor(left)+1}`
+                }
+            }
+            minutes = Math.floor((left%1)*60);
+
+            if ((hourStart*60 + minutes) <= (7*60 + 30)){
+                hourStart='07';
+                minutes='30';
+            }
+            if ((hourEnd*60 + minutes) <= (7*60 + 30)){
+                hourEnd='07';
+                minutes='31';
+            }
+
+            minutes = Math.floor((left%1)*60);
+            if (minutes<10){
+                minutes=`0${minutes}`
+            }
+            let startStr = ``
+            this.setState({
+                roomSelectedId:id,
+                indexRoom:0,
+                startInput:`${hourStart}:${minutes}`,
+                endInput:`${hourEnd}:${minutes}`,
+                endValid:true,
+                startValid:true
+            })
+
     }
+}
+    handleCloseClick(){
+        this.setState({
+            roomSelectedId:-1,
+        })
+    }
+    handleRoomClick(id, index){
+        this.setState({
+            roomSelectedId:id,
+            indexRoom:index
+        })
+    }
+
     _showError(){
-        if((this.state.dateValid===false)||(this.state.endValid===false)||(this.state.startValid===false)||(this.state.themeValid===false)||(this.state.usersInNewMeet.length===0)){
+        if((this.state.dateValid===false)||(this.state.endValid===false)||(this.state.startValid===false)||(this.state.themeValid===false)||(this.state.usersInNewMeet.length===0)||(this.state.roomSelectedId===-1)){
             this.setState({
                 showError:true
             })
+            return false;
         }
         else{
             this.setState({
-                showError:false
+                showError:false,
             })
+            return true;
         }
     }
+
     _handleKeyPress(event){
         if (event.key === 'Enter') {
             this.getUsers();
@@ -101,13 +194,15 @@ class NewMeet extends React.Component{
             })
         }
     }
+
     startEndValidation(time){
         let hours = time.slice(0,2);
         let minutes = time.slice(3,5);
+        let min5 = minutes[1];
         if ((hours !=='')&&(minutes !=='')){
             hours = Number(hours);
             minutes = Number(minutes);
-            if (((hours===8) && ((29<minutes)&&(minutes<60))) || (((8<hours)&&(hours<=22))&&((0<=minutes)&&(minutes<=59)))){
+            if ((((hours===7) && ((29<minutes)&&(minutes<60))) || (((7<hours)&&(hours<=22))&&((0<=minutes)&&(minutes<=59))))&&min5!=undefined){
                 return true;
             }
             else{
@@ -130,7 +225,7 @@ class NewMeet extends React.Component{
                 }, ()=>{
                     if (this.state.themeInput===''){
                         this.setState({
-                            themeValid:false
+                            themeValid:false,
                         })
                     }
                     else{
@@ -147,16 +242,20 @@ class NewMeet extends React.Component{
                 }, ()=>{
                     if (this.startEndValidation(this.state.startInput)){
                         this.setState({
-                            startValid:true
+                            startValid:true,
+                            roomSelectedId:-1
                         })
                     }
                     else{
                         this.setState({
-                            startValid:false
+                            startValid:false,
+                            roomSelectedId:-1
                         })
                     }
                     this.setState({
-                        endInput:''
+                        endInput:'',
+                        endValid:false,
+                        roomSelectedId:-1
                     })
                 });
                
@@ -172,13 +271,15 @@ class NewMeet extends React.Component{
                         let end = Number(this.state.endInput.slice(0,2))*60 + Number(this.state.endInput.slice(3,5));
                         if (end>start){
                             this.setState({
-                                endValid:true
+                                endValid:true,
+                                roomSelectedId:-1
                             })
                         }
                     }
                     else{
                         this.setState({
-                            endValid:false
+                            endValid:false,
+                            roomSelectedId:-1
                         })
                     }
                 });
@@ -214,35 +315,72 @@ class NewMeet extends React.Component{
         if (sumA > sumB) return 1;
         if (sumA < sumB) return -1;
     }
+    setDate(){
+        let start = new Date();
+        let end = new Date();
+        let hourStart = Number(this.state.startInput.slice(0,2));
+        let minutesStart = Number(this.state.startInput.slice(3,5));
+        let hourEnd = Number(this.state.endInput.slice(0,2));
+        let minutesEnd= Number(this.state.endInput.slice(3,5));
+        start.setFullYear(this.state._year);
+        start.setMonth(this.state._month);
+        start.setDate(this.state._dayNow);
+        end.setFullYear(this.state._year);
+        end.setMonth(this.state._month);
+        end.setDate(this.state._dayNow);
+        start.setHours(hourStart);
+        start.setMinutes(minutesStart);
+        end.setHours(hourEnd);
+        end.setMinutes(minutesEnd);
+        return [start, end];
+    }
 
-    getRecomendation(){
-        let start = new Date(new Date().getTime() + 1000*60*60*10);
-        let end = new Date(start.getTime() + 1000*60*60*3);
-        let rooms = this.props.data.rooms.slice(0,this.props.data.rooms.length);
-        let capacityprop = 5;
-
-
+    getRecomendation(rooms){
+        let [start, end] = this.setDate();
+        let capacityprop = 0;
+        console.log(start, end);
         for (let i = 0; i < rooms.length; i++){
             if (rooms[i].capacity < capacityprop){
                 rooms.splice(i,1);
             }
-            for (let j = 0; j < this.props.data.events; j++){
-                if (( start.getTime() <= Date.parse(this.props.data.events[j].dateEnd) <= end.getTime()) || ( start.getTime() <= Date.parse(this.props.data.events[j].dateEnd) <= end.getTime())){
-                    rooms.splice(j,1);
+            for (let j = 0; j < this.props.data.events.length; j++){
+                if ((( Date.parse(this.props.data.events[j].dateStart) <= start.getTime() )&&(Date.parse(this.props.data.events[j].dateEnd)>= start.getTime())&&(this.props.data.events[j].room.id===rooms[i].id)) || (( end.getTime() >= Date.parse(this.props.data.events[j].dateStart))&& (Date.parse(this.props.data.events[j].dateEnd)>= end.getTime())&&(this.props.data.events[j].room.id===rooms[i].id))){
+                    rooms.splice(i,1);
+     
                 }
+
             }
         }
         rooms.sort(this.sortR)
-        rooms.start=`${start.getHours()}:${start.getMinutes()}`;
-        rooms.end=`${end.getHours()}:${end.getMinutes()}`;
+        rooms.start=`${this.state.startInput}`;
+        rooms.end=`${this.state.endInput}`;
        return(
         rooms
        )
        
     }
     render(){
+        let start, end;
+        let path = window.location.pathname;
+        let rooms=[];
         if (!this.props.data.loading){
-        let rooms = this.getRecomendation();
+
+        if ((this.state.dateValid===true)&&(this.state.endValid===true)&&(this.state.startValid)&&(this.state.themeInput!='')&&(this.state.usersInNewMeet.length!=0)){
+             rooms = this.getRecomendation(this.props.data.rooms.slice(0,this.props.data.rooms.length));
+             [start, end] = this.setDate();
+        }
+        else{
+            if (this.state.roomSelectedId!==-1){
+                for(let i = 0; i < this.props.data.rooms.length; i++){
+                    if (this.props.data.rooms[i].id===this.state.roomSelectedId){
+                        rooms=this.getRecomendation(this.props.data.rooms.slice(i,i+1));
+
+                    }
+                }
+                [start, end] = this.setDate();
+            }
+        }
+
     return(
 <div className="body-new-meet">
     <main className={this.props.location.pathname===`/NewMeet`? `main-new-meet`: `main-new-meet main-edit-meet`}>
@@ -250,7 +388,7 @@ class NewMeet extends React.Component{
         <div className="nmeet-container">
             <div className="title-line">
                 {this.props.location.pathname===`/NewMeet`?<div className="title-line_title">Новая встреча</div>:<div className="title-line_title">Редактирование встречи</div>}
-                <a className="title-line_exit-button"><img src="assets/close.svg" alt=""/></a>
+                <a href="/" className="title-line_exit-button"><img src="assets/close.svg" alt=""/></a>
             </div>
             <div className="theme-line ">
                 <div className={((this.state.themeValid===true)||(this.state.themeInput==='')&&(this.state.showError===false))?`theme`:`theme input_valid_err`}>
@@ -259,7 +397,7 @@ class NewMeet extends React.Component{
                     <div className="input_error">Поле не должно быть пустым</div>
                 </div>
                 <div className="time">
-                    <div className={((this.state.themeValid===true)||(this.state.themeInput==='')&&(this.state.showError===false))?`date`:`date input_valid_err`}>
+                    <div className={((this.state.dateValid===true)||(this.state.dateInput==='')&&(this.state.showError===false))?`date`:`date input_valid_err`}>
                         <div className="theme_title">Дата</div>
                         <input className="date_input" id="dateInput" value={this.state.dateInput} onChange={this.handleChange} type="text"/>
                         <div className="input_error">Формат даты (dd.mm.yyyy)</div>
@@ -285,10 +423,9 @@ class NewMeet extends React.Component{
             <div className="members-line">
                 <div className="nmeet-container">
                 <div className="members">
-                    
-                    <div className="members_input-block">
+                    <div className={((this.state.usersInNewMeet.length!==0)||(this.state.membInput==='')&&(this.state.showError===false))?`members_input-block`:`members_input-block input_valid_err`}>
                         <div className="theme_title">Участники</div>
-                        <input className={((this.state.usersInNewMeet.length!==0)||(this.state.endInput==='')&&(this.state.showError===false))?`members_input-block`:`members_input-block input_valid_err`} id="membInput" onKeyPress={this._handleKeyPress} value={this.state.membInput} onChange={this.handleChange} className="members_input awesomplete"  type="text"/>
+                        <input  id="membInput" onKeyPress={this._handleKeyPress} value={this.state.membInput} onChange={this.handleChange} className="members_input awesomplete"  type="text"/>
                         <div className="input_error">Cписок не должен быть пуст</div>
                     </div>
                     <div className="members_show">
@@ -300,7 +437,9 @@ class NewMeet extends React.Component{
                 <div className="nmeet-container">
                 <div className="select-room">
                     <div className="theme_title" onClick={this._showError}>Рекомендованные переговорки</div>
-                    {rooms.map((room)=><SelectRoomBlock  key={room.id} id={room.id} title ={room.title} floor={room.floor} end={rooms.end} start={rooms.start}/>)}
+                    {this.state.roomSelectedId===-1?
+                    rooms.map((room, index)=><SelectRoomBlock closeClick={this.handleCloseClick} indexRoom={index} selectId={this.state.roomSelectedId}  key={room.id} id={room.id} RoomClick={this.handleRoomClick} title ={room.title} floor={room.floor} end={rooms.end} start={rooms.start}/>):
+                    rooms.length!==0?<SelectRoomBlock closeClick={this.handleCloseClick}  selectId={this.state.roomSelectedId}  key={rooms[this.state.indexRoom].id} id={rooms[this.state.indexRoom].id} RoomClick={null} title ={rooms[this.state.indexRoom].title} floor={rooms[this.state.indexRoom].floor} end={rooms.end} start={rooms.start}/>:<div>В это время выбранная переговорка занята(</div>}
                 </div>
             </div>
         </div>
@@ -308,8 +447,8 @@ class NewMeet extends React.Component{
     <Route path='/EditMeet' component={ DelButtonInEdit}/>
     </main>
     <Switch>
-        <Route path='/NewMeet' component={FooterInNew}/>
-        <Route path='/EditMeet' component={FooterInEdit}/>
+        <Route path='/NewMeet' render={()=><FooterInNew roomSelectedId={this.state.roomSelectedId} _showErrorFun={this._showError} themeInput={this.state.themeInput} start={start} end = {end} usersInNewMeet={this.state.usersInNewMeet}/>}/>
+        <Route path='/EditMeet' render={()=><FooterInEdit/>}/>
     </Switch>
 </div>
     )

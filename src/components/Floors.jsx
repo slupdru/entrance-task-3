@@ -76,9 +76,8 @@ class Floors extends React.Component{
         }
         return(
         <div>
-                {floorsMass.map((floor, index)  => <Floor
-                //  OnClickMeetFS={this.handleClickMeet} 
-                 idFloor = {index} key={index} floorCount = {index} rooms ={floor}/>)}
+                {floorsMass.map((floor, index)  => 
+                <Floor idFloor = {index} key={index} floorCount = {index} rooms ={floor}/>)}
         </div>
         )
     }

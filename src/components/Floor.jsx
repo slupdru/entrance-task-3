@@ -1,6 +1,7 @@
 import React from 'react';
 import FloorRow from './FloorRow';
 function Floor(props){
+
     return(
         <div className="floor">
             <div className="floor_row floor_row-first">
@@ -9,7 +10,7 @@ function Floor(props){
             </div>
                 {props.rooms.map(room => <FloorRow idFloorRow ={room.key}
                 //  OnClickMeetFR={()=> props.OnClickMeetFS(props.idFloor)}
-                  key = {room.key} roomTitle={`${room.roomTitle}`} completed = {room.completed} events={room.events} roomSubtitile ={`${room.roomSubtitile}` }/>)}
+                  key = {room.key} id={room.key} roomTitle={`${room.roomTitle}`} completed = {room.completed} events={room.events} roomSubtitile ={`${room.roomSubtitile}` }/>)}
             </div>
     )
 }

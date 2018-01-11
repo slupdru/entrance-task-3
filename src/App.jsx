@@ -3,22 +3,20 @@ import './styles/styles.scss'
 import './styles/style-mobile.scss'
 import { Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
-import Timebar from './components/Timebar';
 import MainContainer from './components/MainContainer';
 import NewMeet from './components/NewMeet'
 
   
 function App(){
     return(
-        <main>
+        <div>
             <Header/>
-            <Route exact path='/' component ={Timebar}/>
             <Switch>
                 <Route exact path='/' component={MainContainer}/>
                 <Route path='/NewMeet' component={NewMeet}/>
                 <Route path='/EditMeet' component={NewMeet}/>
             </Switch>
-        </main>
+        </div>
     );
 }
 export default App;

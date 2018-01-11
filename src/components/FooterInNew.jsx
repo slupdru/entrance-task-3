@@ -24,13 +24,19 @@ class FooterInNew extends React.Component{
         this.onClick=this.onClick.bind(this);
     }
     onClick() {
+        if (this.props._showErrorFun()===true){
+        let massOfUsers = [];
+        for (let i = 0; i < this.props.usersInNewMeet.length; i++){
+            massOfUsers.push(this.props.usersInNewMeet[i].id);
+        }
+        console.log(this.props.start, this.props.end);
         this.props.mutate({
         variables: { 
-            title: 'Обсуждения важные',
-            dateStart:'2018-01-07T14:30:45.678Z',
-            dateEnd:'2018-01-07T16:30:45.678Z',
-            usersIds:[2,3],
-            roomId:4
+            title: this.props.themeInput,
+            dateStart:this.props.start,
+            dateEnd:this.props.end,
+            usersIds:massOfUsers,
+            roomId:this.props.roomSelectedId
         }
         })
           .then(({ data }) => {
@@ -39,6 +45,10 @@ class FooterInNew extends React.Component{
             console.log('there was an error sending the query', error);
           });
       }
+      else{
+        console.log('нет');
+    }
+    }
 
     render(){
     return(
@@ -48,7 +58,7 @@ class FooterInNew extends React.Component{
         </div>
         <div className="buttons-container">
             <a href="/" className="buttons-container_cancel">Отмена</a>
-            <a href="/" onClick={this.onClick} className="header_button-foo">Создать встречу</a>
+            <a  onClick={this.onClick} className="header_button-foo">Создать встречу</a>
         </div>
     </footer>
     )
