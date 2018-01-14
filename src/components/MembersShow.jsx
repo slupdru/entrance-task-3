@@ -1,6 +1,6 @@
 import React from "react";
 import "../assets/close.svg";
-class MembersShow extends React.Component {
+class MembersShow extends React.Component {//блок с добавленным пользователем 
   constructor(props) {
     super(props);
   }
@@ -8,7 +8,6 @@ class MembersShow extends React.Component {
     return (
       <div className="members-show_show-block">
         <img
-          className=""
           className="membres-show_icon"
           src={this.props.avatarUrl}
         />

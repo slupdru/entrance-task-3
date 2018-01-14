@@ -8,7 +8,7 @@ function Floor(props) {
         <div className="floor_row floor_row-tablet floor_row-first" />
       </div>
       {props.rooms.map(room =>
-        <FloorRow
+        <FloorRow //строка с переговоркой
           idFloorRow={room.key}
           key={room.key}
           id={room.key}

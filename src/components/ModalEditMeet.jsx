@@ -9,7 +9,7 @@ const MUTATION_DELETE_MEET = gql`
     }
   }
 `;
-class ModalEditMeet extends React.Component {
+class ModalEditMeet extends React.Component { //модальное окно на странице редактирования встречи
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);

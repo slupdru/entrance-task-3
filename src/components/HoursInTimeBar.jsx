@@ -1,5 +1,5 @@
 import React from "react";
-function HoursInTimeBar(props) {
+function HoursInTimeBar(props) { //определяем сколько часов уже прошло, делаем их серыми 
   let massOfHours = [];
   let left = (props.hoursIsOver - 7.8 + props.minutes / 60) * 6.4;
   for (let i = 0; i < 16; i++) {

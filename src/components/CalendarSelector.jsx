@@ -9,7 +9,7 @@ function CalendarSelector(props) {
         <div className="timebar_arrow-container">
           <img className="timebar_img_left" src="assets/arrow2.svg" alt="" />
         </div>
-        <DateNow
+        <DateNow //компонент показывает текущую дату
           blue={props.clicked}
           clickDate={props.ClickDate}
           dateProps={props.date}

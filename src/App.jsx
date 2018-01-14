@@ -14,7 +14,7 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={MainContainer} />
-        <Route path="/NewMeet" component={NewMeet} />
+        <Route path="/NewMeet" component={NewMeet} /> 
         <Route path="/EditMeet" component={NewMeet} />
       </Switch>
     </div>

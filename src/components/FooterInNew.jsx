@@ -20,7 +20,7 @@ const MUTATION_CREATE_MEET = gql`
   }
 `;
 
-class FooterInNew extends React.Component {
+class FooterInNew extends React.Component {//футер для страницы новой встречи
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);

@@ -17,13 +17,13 @@ class MeetBlock extends React.Component {
     let colorMeet;
     this.state.clicked === false ? (colorMeet = "") : (colorMeet = "#99A9B9");
     const HOUR = 1000 * 60 * 60;
-    let leftInPr =
+    let leftInPr =//считаем  значение left для встречи в процентах, исходя из времени начала встречи
       (this.props.start.getHours() +
         this.props.start.getMinutes() / 60 +
         this.props.start.getSeconds() / (60 * 60) -
         7.5) *
       6.4;
-    let widthInPr =
+    let widthInPr =//считаеи значение width для встречи в процентах, исходя из разности начала и конца встречи
       (this.props.end.getTime() - this.props.start.getTime()) / HOUR * 6.4;
     let meetBlockStyle = {
       left: `${leftInPr}%`,
@@ -38,7 +38,7 @@ class MeetBlock extends React.Component {
         onMouseOver={this.handleOver}
         className="meet-dark-block"
       >
-        <ModalInCell
+        <ModalInCell //тултип для стречи
           roomId={this.props.roomId}
           idEvent={this.props.idEvent}
           nameRoom={this.props.nameRoom}

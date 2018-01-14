@@ -141,10 +141,7 @@
   .floor_row.floor_row-tablet.floor_row-first + .floor_row.floor_row-tablet {
     margin-top: 0px;
   }
-  .linear-back_cell,
-  .linear-back,
-  .table-container {
-  }
+
   .table-container {
     flex-grow: 0;
   }
@@ -183,6 +180,12 @@
   }
   .timebar_date-container.timebar_date-container-mobile {
     display: flex;
+  }
+  .modal-new-meet{
+      position: fixed;
+  }
+  .modal-new-meet.modal-delete{
+      position: fixed;
   }
   .floor_button > span {
     display: none;

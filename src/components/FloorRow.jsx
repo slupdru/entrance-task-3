@@ -3,20 +3,6 @@ import MeetBlock from "./MeetBlock";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 
-// const QWERY_EVENT =  gql`query QWERY_EVENT($id:ID!){
-//     event(id:$id) {
-//       id
-//       title
-//       dateEnd
-//       dateStart
-//       users {
-//         id
-//       }
-//       room {
-//         id
-//       }
-//     }
-//   } `;
 let main;
 class FloorRow extends React.Component {
   constructor(props) {
@@ -27,7 +13,7 @@ class FloorRow extends React.Component {
       hovered: false,
       scrollLeft: 0
     };
-    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleHover = this.handleHover.bind(this);
     this.handleOutHover = this.handleOutHover.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
@@ -36,13 +22,13 @@ class FloorRow extends React.Component {
     main = document.getElementsByTagName("main")[0];
     main.addEventListener("scroll", this.handleScroll);
   }
-  handleScroll(event) {
+  handleScroll(event) {// изменяем скрол для названий переговорок на мобилных устройствах
     let scrollLeft = main.scrollLeft;
     this.setState({
       scrollLeft: scrollLeft
     });
   }
-  handleOutHover(event) {
+  handleOutHover(event) {// подсвечиваем названия переговорок по наведении на строку 
     this.setState({
       hovered: false
     });
@@ -53,7 +39,7 @@ class FloorRow extends React.Component {
     });
   }
 
-  handleMouseOver(event) {
+  handleMouseMove(event) {//изменяем положение синей кнопки по движению мыши
     if (document.documentElement.clientWidth > 850) {
       if (!event.target.classList.contains("meet-dark-block")) {
         let newVal =
@@ -122,7 +108,7 @@ class FloorRow extends React.Component {
               .roomSubtitile} человек`}</div>
           </div>
           <div
-            onMouseMove={this.handleMouseOver}
+            onMouseMove={this.handleMouseMove}
             className="floor_row floor_row-tablet"
           >
             <div
@@ -182,7 +168,7 @@ class FloorRow extends React.Component {
               .roomSubtitile} человек`}</div>
           </div>
           <div
-            onMouseMove={this.handleMouseOver}
+            onMouseMove={this.handleMouseMove}
             className="floor_row floor_row-tablet"
           >
             <div

@@ -24,7 +24,7 @@ const MUTATION_CHANGE_MEET = gql`
   }
 `;
 
-class FooterInEdit extends React.Component {
+class FooterInEdit extends React.Component {//футер для страницы редактирования встречи 
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);

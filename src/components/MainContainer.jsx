@@ -7,6 +7,7 @@ class MainContainer extends React.Component {
     return (
       <main>
         <Timebar />
+        {/* Сетка с временными интрвалами */}
         <div className="main-container" id="main_cont">
           <div className="linear-back">
             <div className="linear-back_container">

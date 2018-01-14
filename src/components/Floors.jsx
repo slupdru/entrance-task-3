@@ -35,7 +35,7 @@ class Floors extends React.Component {
     this.state = {};
   }
   render() {
-    if (!this.props.data.loading) {
+    if (!this.props.data.loading) {//Получаем данные о переговорках и событиях с сервера, наполяем переговорки событиями, распределяем данные по этажам
       let floorsMass = [];
       for (let i = 0; i < this.props.data.rooms.length; i++) {
         if (floorsMass[this.props.data.rooms[i].floor] === undefined) {

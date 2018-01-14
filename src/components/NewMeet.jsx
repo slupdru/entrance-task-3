@@ -1,3 +1,4 @@
+//Компонент страниц добавления и редактирования новой встречи, получилось немного страшно, по неопытности реализовывал интуитивно 
 import React from "react";
 import "../assets/close.svg";
 import "../styles/new-meet.scss";
@@ -51,29 +52,29 @@ class NewMeet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalDisplay: false,
-      selectUserLoad: true,
-      yourRoomSwow: false,
-      loadEditMeet: true,
-      eventSelectedId: -1,
-      eventSelected: {},
-      themeInput: "",
-      themeValid: false,
-      dateInput: "",
-      dateValid: true,
-      startInput: "",
-      startValid: false,
-      endInput: "",
-      endValid: false,
-      membInput: "",
-      usersInNewMeet: [],
-      showError: false,
-      roomSelectedId: -1,
-      roomSelectedfloor: -1,
-      indexRoom: -1,
-      _month: 0,
-      _dayNow: 0,
-      _year: 2018
+      modalDisplay: false,//показать модальное окно
+      selectUserLoad: true,//передали данные о добавленных пользователях в state на странице редактирования
+      yourRoomSwow: false,//показать "редактирование встречи" или "ваша комната"
+      loadEditMeet: true,//передали остальные данные в state на странице редактирования
+      eventSelectedId: -1,//id выбранного события
+      eventSelected: {},//выюранное событие
+      themeInput: "",//value выбора темы обсуждения
+      themeValid: false,//правильность ввода темы
+      dateInput: "",//value выбора даты
+      dateValid: true,// правильность выбора даты
+      startInput: "",// value выбора начала встречи
+      startValid: false,//правильность ввода времени начала
+      endInput: "",//value времени окончания события
+      endValid: false,//правильность ввода окончания события
+      membInput: "",//value ввода участников встречи
+      usersInNewMeet: [],//участники встречи
+      showError: false,//показать ошибки
+      roomSelectedId: -1,//id выбранной комнаты 
+      roomSelectedfloor: -1,//этаж выбранной комнаты
+      indexRoom: -1,//index в массиве, выбранной комнаты
+      _month: 0,//текущий месяц
+      _dayNow: 0,//текущий день
+      _year: 2018//текущий год
     };
     this.handleChange = this.handleChange.bind(this);
     this.getRecomendation = this.getRecomendation.bind(this);
@@ -89,13 +90,13 @@ class NewMeet extends React.Component {
     this.handleCloseClickMemb = this.handleCloseClickMemb.bind(this);
     this.handleClickDel = this.handleClickDel.bind(this);
   }
-  handleClickDel() {
+  handleClickDel() {//нажатие кнопки "удалить встречу"
     this.setState({
       modalDisplay: !this.state.modalDisplay
     });
   }
   componentWillMount() {
-    let dayNow = new Date().getDate();
+    let dayNow = new Date().getDate();//врменное решение установки даты
     let month = new Date().getMonth();
     this.setState({
       _dayNow: dayNow,
@@ -113,7 +114,7 @@ class NewMeet extends React.Component {
     this.setState({
       dateInput: fullDate
     });
-    if (window.location.hash != "" && window.location.pathname === "/NewMeet") {
+    if (window.location.hash != "" && window.location.pathname === "/NewMeet") {//парсим хэш при создании новой встречи
       let pos1 = window.location.hash.indexOf("|", 0);
       let pos2 = window.location.hash.indexOf("|", pos1 + 1);
       let id = window.location.hash.slice(1, pos1);
@@ -172,7 +173,7 @@ class NewMeet extends React.Component {
       });
     }
     if (
-      window.location.hash != "" &&
+      window.location.hash != "" &&//парсим хэш при редактировании встречи
       window.location.pathname === "/EditMeet"
     ) {
       let pos = window.location.hash.indexOf("|", 0);
@@ -184,20 +185,11 @@ class NewMeet extends React.Component {
           indexRoom: 0,
           yourRoomSwow: true,
           selectUserLoad: false
-        },
-        () => {
-          console.log(
-            this.state.eventSelectedId,
-            this.state.roomSelectedId,
-            this.state.indexRoom
-          );
         }
       );
     }
-
-    window.addEventListener("load", this.handleLoad);
   }
-  handleSendChangeClick() {
+  handleSendChangeClick() {//кнопка 'созранить'
     if (this.state.loadEditMeet === false) {
       let title = eventS.title;
       this.setState(
@@ -211,25 +203,24 @@ class NewMeet extends React.Component {
           endValid: true,
           yourRoomSwow: false,
           usersInNewMeet: eventS.users
-        },
-        () => console.log(this.state)
+        }
       );
     }
   }
-  handleCloseClick() {
+  handleCloseClick() {//отменить выбор комнаты
     this.setState({
       roomSelectedId: -1,
       yourRoomSwow: false
     });
   }
-  handleRoomClick(id, index) {
+  handleRoomClick(id, index) {//выбор комнаты
     this.setState({
       roomSelectedId: id,
       indexRoom: 0
     });
   }
 
-  _showError() {
+  _showError() {//показать ошибки ввода
     if (
       this.state.dateValid === false ||
       this.state.endValid === false ||
@@ -249,7 +240,7 @@ class NewMeet extends React.Component {
       return true;
     }
   }
-  handleCloseClickMemb(id) {
+  handleCloseClickMemb(id) {//удалить пользователя
     if (this.state.selectUserLoad === false) {
       let users = eventS.users;
       let title = eventS.title;
@@ -291,7 +282,7 @@ class NewMeet extends React.Component {
       });
     }
   }
-  _handleKeyPress(event) {
+  _handleKeyPress(event) {//добавление пользователя по нажатию enter
     if (event.key === "Enter") {
       this.getUsers();
       this.setState({
@@ -300,7 +291,7 @@ class NewMeet extends React.Component {
     }
   }
 
-  startEndValidation(time) {
+  startEndValidation(time) {//проверка правильности ввода значений начала встречи и конца
     let hours = time.slice(0, 2);
     let minutes = time.slice(3, 5);
     let min5 = minutes[1];
@@ -326,7 +317,7 @@ class NewMeet extends React.Component {
     }
   }
 
-  handleChange(event) {
+  handleChange(event) {//изменение значения inputов
     let inpVal = event.target.value;
     let id = event.target.id;
     if (this.state.loadEditMeet === false) {
@@ -428,15 +419,12 @@ class NewMeet extends React.Component {
       case "membInput":
         {
           if (this.state.selectUserLoad === false) {
-            console.log(eventS);
             let users = eventS.users;
-            console.log(users);
             this.setState(
               {
                 selectUserLoad: true,
                 usersInNewMeet: users
-              },
-              () => console.log(this.state.usersInNewMeet)
+              }
             );
           }
           this.setState({
@@ -457,14 +445,9 @@ class NewMeet extends React.Component {
           ]
         });
       }
-      console.log(
-        this.state.membInput,
-        this.state.usersInNewMeet,
-        this.props.data.users[i].login
-      );
     }
   }
-  sortR(a, b) {
+  sortR(a, b) {//сортировка переговорок по количеству пройденных этажей
     let sumA = 0;
     let sumB = 0;
     for (let i = 0; i < this.state.usersInNewMeet.length; i++) {
@@ -474,7 +457,7 @@ class NewMeet extends React.Component {
     if (sumA > sumB) return 1;
     if (sumA < sumB) return -1;
   }
-  setDate() {
+  setDate() {//получение даты из строки
     let start = new Date();
     let end = new Date();
     let hourStart = Number(this.state.startInput.slice(0, 2));
@@ -494,7 +477,7 @@ class NewMeet extends React.Component {
     return [start, end];
   }
 
-  getRecomendation(rooms, nonval) {
+  getRecomendation(rooms, nonval) {//рекомендованные встречи
     let [start, end] = this.setDate();
     let capacityprop = this.state.usersInNewMeet.length;
     if (nonval === false) {
@@ -552,7 +535,6 @@ class NewMeet extends React.Component {
                   this.props.data.rooms.slice(i, i + 1),
                   false
                 );
-                console.log(rooms);
               }
             }
             [start, end] = this.setDate();
@@ -745,7 +727,6 @@ class NewMeet extends React.Component {
               <div className="members-line">
                 <div className="nmeet-container">
                   <div className="members">
-                    {console.log(this.state.usersInNewMeet)}
                     <div
                       className={
                         this.state.usersInNewMeet.length !== 0 ||
@@ -799,7 +780,6 @@ class NewMeet extends React.Component {
                         ? "Рекомендованные переговорки"
                         : "Ваша переговорка"}
                     </div>
-                    {console.log(this.state.indexRoom, rooms)}
                     {this.state.roomSelectedId === -1
                       ? rooms.map((room, index) =>
                           <SelectRoomBlock
