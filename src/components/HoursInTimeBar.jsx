@@ -1,28 +1,53 @@
-import React from 'react';
-function HoursInTimeBar(props){
-    let massOfHours = [];
-    for (let i = 0; i< 16; i++){
-        if ((i+8) > props.hoursIsOver) {
-            if (i === 0){
-            massOfHours.push( <span key={i} className="time-container_hours">8:00</span>)
-            }
-            else massOfHours.push( <span key={i} className="time-container_hours">{i+8}</span>)
-        }
-        else{
-            if (i === 0){
-                massOfHours.push( <span key={i} className="time-container_hours time-container_hours_passed">8:00</span>)
-                }
-            else{
-            massOfHours.push(<span key={i} className="time-container_hours time-container_hours_passed">{i+8}</span>);
-            }
-        }
-
+import React from "react";
+function HoursInTimeBar(props) {
+  let massOfHours = [];
+  let left = (props.hoursIsOver - 7.8 + props.minutes / 60) * 6.4;
+  for (let i = 0; i < 16; i++) {
+    if (i + 8 > props.hoursIsOver) {
+      if (i === 0) {
+        massOfHours.push(
+          <span key={i} className="time-container_hours">
+            8:00
+          </span>
+        );
+      } else
+        massOfHours.push(
+          <span key={i} className="time-container_hours">
+            {i + 8}
+          </span>
+        );
+    } else {
+      if (i === 0) {
+        massOfHours.push(
+          <span
+            key={i}
+            className="time-container_hours time-container_hours_passed"
+          >
+            8:00
+          </span>
+        );
+      } else {
+        massOfHours.push(
+          <span
+            key={i}
+            className="time-container_hours time-container_hours_passed"
+          >
+            {i + 8}
+          </span>
+        );
+      }
     }
-    return(   
+  }
+  return (
     <div className="timebar_time-container">
-        { 
-            massOfHours.map(hour => hour)}
+      <div className="time-now" style={{ left: `${left}%` }}>
+        <div className="time-now_ellips">
+          <div className="time-now-container">{`${props.hoursIsOver}:${props.minutes}`}</div>
+        </div>
+        <div className="time-now_line" />
+      </div>
+      {massOfHours.map(hour => hour)}
     </div>
-    )
+  );
 }
 export default HoursInTimeBar;

@@ -1,259 +1,259 @@
 @media screen and (max-width: 850px) {
-    main{
-        overflow: auto;
-    }
-    .leftbar .floor{
-        background: #F6F7F9;
-    }
-    .leftbar{
-        width: 181px;
-    }
-    .main-container{
-        width: 1255px;
-    }
-    .header_logo{
-        width:149px;
-        height: 20.9px;
-        margin-left: 20.5px;
-    }
-    .scrollBlock{
-        width: 1221px;
-        overflow: auto;
-    }
-    .header_container{
-        margin-top: 15.8px;
-        padding-bottom: 11.3px;
-        margin-bottom: 0px;
-        box-shadow: 0 1px 0 0 #E9ECEF;
-    }
-    .header_button{
-        display: none;
-    }
-    .timebar_main-container{
-        flex-direction: column;
-    }
-    .timebar_mobile-container{
-        width: 328px;
-        justify-content: center;
-    }
-    .timebar_date{
-        margin: 4px 52px;
-    }
-    .timebar_main-container{
-        margin-top:0px;
-        margin-bottom: 12px;
-    }
-    .timebar_date-container{
-        justify-content: center;
-        margin-left: 0px;
-        margin-bottom: 12px;
-    }
-    .timebar_time-container{
-        margin-top:9px;
-        margin-bottom: 10px;
-        margin-left: 224px;
-    }
+  main {
+    overflow: auto;
+  }
+  .leftbar .floor {
+    background: #f6f7f9;
+  }
+  .leftbar {
+    width: 181px;
+  }
+  .main-container {
+    width: 1255px;
+  }
+  .header_logo {
+    width: 149px;
+    height: 20.9px;
+    margin-left: 20.5px;
+  }
+  .scrollBlock {
+    width: 1221px;
+    overflow: auto;
+  }
+  .header_container {
+    margin-top: 15.8px;
+    padding-bottom: 11.3px;
+    margin-bottom: 0px;
+    box-shadow: 0 1px 0 0 #e9ecef;
+  }
+  .header_button {
+    display: none;
+  }
+  .timebar_main-container {
+    flex-direction: column;
+  }
+  .timebar_mobile-container {
+    width: 328px;
+    justify-content: center;
+  }
+  .timebar_date {
+    margin: 4px 52px;
+  }
+  .timebar_main-container {
+    margin-top: 0px;
+    margin-bottom: 12px;
+  }
+  .timebar_date-container {
+    justify-content: center;
+    margin-left: 0px;
+    margin-bottom: 12px;
+  }
+  .timebar_time-container {
+    margin-top: 9px;
+    margin-bottom: 10px;
+    margin-left: 224px;
+  }
 
-    .timebar_main-container{
-        margin-bottom: 0px;
-    }
-    .time-container_hours{
-        flex-grow: 0;
-        color: #262626;
-        text-align: center;
-        margin-right: 53.7px;
-    }
-    .timebar_date-container.timebar_date-container-mobile{
-        display: flex;
-        padding-top: 12px;
-        margin-bottom: 0px;
-        padding-bottom: 12px;
-        box-shadow: 0 1px 0 0 #E9ECEF;
-    }
-    header{
-        z-index: 5;
-        background: white;
-        width: 100vw;
-        top:0px;
+  .timebar_main-container {
+    margin-bottom: 0px;
+  }
+  .time-container_hours {
+    flex-grow: 0;
+    color: #262626;
+    text-align: center;
+    margin-right: 53.7px;
+  }
+  .timebar_date-container.timebar_date-container-mobile {
+    display: flex;
+    padding-top: 12px;
+    margin-bottom: 0px;
+    padding-bottom: 12px;
+    box-shadow: 0 1px 0 0 #e9ecef;
+  }
+  header {
+    z-index: 5;
+    background: white;
+    width: 100vw;
+    top: 0px;
+  }
+  .timebar {
+    box-shadow: none;
+  }
+  .floor_row {
+    margin-top: 2px;
+  }
+  html {
+    background: #f6f7f9;
+  }
+  .header_container {
+    padding-top: 15.8px;
+    margin-top: 0px;
+  }
+  .room {
+    padding: 11px 25px;
+    background: white;
+  }
+  .room,
+  .floor_name {
+    width: 181px;
+  }
+  .white-background {
+    width: 181px;
+    display: none;
+  }
+  .leftbar .floor_row {
+    background: white;
+  }
+  .floor_row.floor_row-first {
+    background: transparent;
+    height: 31px;
+  }
+  .floor_row.floor_row-first .floor_name {
+    margin-top: 16px;
+  }
+  .floor_row.floor_row-tablet {
+    margin-left: 0px;
+    height: 58px;
+  }
+  .floor_table-hour {
+    flex-grow: 0;
+    width: 65px;
+    height: 100%;
+  }
 
-    }
-    .timebar{
-        box-shadow: none;
-    }
-    .floor_row{
-        margin-top: 2px;
-    }
-    html{
-        background: #F6F7F9;
-    }
-    .header_container{
-        padding-top:15.8px;
-        margin-top: 0px;
-    }
-    .room{
-        padding: 11px 25px;   
-        background: white;
-    }
-    .room, .floor_name{
-        width: 181px;
-    }
-    .white-background{
-        width: 181px;
-        display: none;
-    }
-    .leftbar .floor_row{
-        background: white;
-    }
-    .floor_row.floor_row-first{
-        background: transparent;
-        height: 31px;
-    }
-    .floor_row.floor_row-first .floor_name{
-        margin-top: 16px;
-    }
-    .floor_row.floor_row-tablet{
-        margin-left: 0px;
-        height: 58px;
-    }
-    .floor_table-hour{
-        flex-grow: 0;
-        width: 65px;
-        height: 100%;
-    }
+  .floor {
+    flex-grow: 0;
+  }
+  .timebar_time {
+    background: white;
+  }
 
-    .floor{
-        flex-grow: 0;
-    }
-    .timebar_time{
-        background: white;
-    }
-    
-    .floor:nth-last-of-type(1){
-        padding-bottom: 40px;
-    }
-    .floor_row.floor_row-tablet{
-        margin-top:0px;
-    }
-    .floor_row.floor_row-tablet.floor_row-first{
-        margin-top:0px;
-        height: 39px;
-    }
-    .floor_row.floor_row-tablet.floor_row-first + .floor_row.floor_row-tablet{
-        margin-top: 0px;
-    }
-    .linear-back_cell, .linear-back, .table-container{
-    }
-    .table-container{
-        flex-grow: 0;
-    }
-    .linear-back_container{
-        margin-left: 202px;
-    }
-    .time-container_hours:last-child{
-        margin-right: 0px;
-    }
-    .leftbar, .table-container{
-        flex-shrink: 0;
-    }
-    .floor_lasthour{
-        height: 58px;
-    }
-    .timebar_arrow-container{
-        height: 32px;
-        width: 32px;
-        position: relative;
-    }
-    .timebar_img_left, .timebar_img_right{
-        position: absolute;
-        height: 15.3px;
-        margin: 0;
-        top:50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-    }
-    .timebar_time{
-        margin-left: 0px;
-    }
-    .timebar_date-container{
-        display: none;
-      }
-    .timebar_date-container.timebar_date-container-mobile{
-        display: flex;;
-    }
-    .floor_button>span{
-        display: none;
-    }
-    .modal-in-cell{
-        height: 136.8px;
-        width: 360px;
-        left: 50%;
-        transform: translate(-65%, 0);
-        z-index: 35;
-
-    }
-    .modal-in-cell::after{
-        left: 231px;
-        top: -17px;
-        border: 7px solid transparent;
-        border-bottom: 10px solid white;
-    }
-    .floor_table-hour{
-        position: static;
-    }
-    .modal-in-cell#meeting_1{
-        top: 285px;
-    }
-    .modal-in-cell#meeting_2, .modal-in-cell#meeting_3{
-        top: 339px;
-    }
-    .modal-in-cell#meeting_4, .modal-in-cell#meeting_5{
-        top:402px;
-    }
-    .modal-in-cell#meeting_6{
-        top: 462px;
-    }
-    .modal-in-cell_title{
-        font-size: 20px;
-        margin-bottom: 8px;
-    }
-    .modal-in-cell_subtitle{
-        font-size: 15px;
-    }
-    .modal-in-cell_users img {
-        width: 32px;
-        height: 32px;
-    }
-    .modal-in-cell_users span {
-       font-size: 15px;
-    }
-    .modal-in-cell_users>span{
-        transform: translateY(6px);
-    }
-    .leftbar{
-        z-index: 1;
-    }
-    .modal-new-meet_panel{
-        width: 360px;
-        height: 267px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 330px;
-    }
-    .modal-new-meet_floor{
-        margin-bottom: 31px;
-    }
-    .modal-new-meet_button{
-        width: 120px;
-        height: 44px;
-        line-height: 44px;
-        font-size: 15px;
-    }
-    .modal-new-meet{
-        background: rgba(0,16,33,0.80);
-    }
+  .floor:nth-last-of-type(1) {
+    padding-bottom: 40px;
+  }
+  .floor_row.floor_row-tablet {
+    margin-top: 0px;
+  }
+  .floor_row.floor_row-tablet.floor_row-first {
+    margin-top: 0px;
+    height: 39px;
+  }
+  .floor_row.floor_row-tablet.floor_row-first + .floor_row.floor_row-tablet {
+    margin-top: 0px;
+  }
+  .linear-back_cell,
+  .linear-back,
+  .table-container {
+  }
+  .table-container {
+    flex-grow: 0;
+  }
+  .linear-back_container {
+    margin-left: 202px;
+  }
+  .time-container_hours:last-child {
+    margin-right: 0px;
+  }
+  .leftbar,
+  .table-container {
+    flex-shrink: 0;
+  }
+  .floor_lasthour {
+    height: 58px;
+  }
+  .timebar_arrow-container {
+    height: 32px;
+    width: 32px;
+    position: relative;
+  }
+  .timebar_img_left,
+  .timebar_img_right {
+    position: absolute;
+    height: 15.3px;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .timebar_time {
+    margin-left: 0px;
+  }
+  .timebar_date-container {
+    display: none;
+  }
+  .timebar_date-container.timebar_date-container-mobile {
+    display: flex;
+  }
+  .floor_button > span {
+    display: none;
+  }
+  .modal-in-cell {
+    height: 136.8px;
+    width: 360px;
+    left: 50%;
+    transform: translate(-65%, 0);
+    z-index: 35;
+  }
+  .modal-in-cell::after {
+    left: 231px;
+    top: -17px;
+    border: 7px solid transparent;
+    border-bottom: 10px solid white;
+  }
+  .floor_table-hour {
+    position: static;
+  }
+  .modal-in-cell#meeting_1 {
+    top: 285px;
+  }
+  .modal-in-cell#meeting_2,
+  .modal-in-cell#meeting_3 {
+    top: 339px;
+  }
+  .modal-in-cell#meeting_4,
+  .modal-in-cell#meeting_5 {
+    top: 402px;
+  }
+  .modal-in-cell#meeting_6 {
+    top: 462px;
+  }
+  .modal-in-cell_title {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  .modal-in-cell_subtitle {
+    font-size: 15px;
+  }
+  .modal-in-cell_users img {
+    width: 32px;
+    height: 32px;
+  }
+  .modal-in-cell_users span {
+    font-size: 15px;
+  }
+  .modal-in-cell_users > span {
+    transform: translateY(6px);
+  }
+  .leftbar {
+    z-index: 1;
+  }
+  .modal-new-meet_panel {
+    width: 360px;
+    height: 267px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 330px;
+  }
+  .modal-new-meet_floor {
+    margin-bottom: 31px;
+  }
+  .modal-new-meet_button {
+    width: 120px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 15px;
+  }
+  .modal-new-meet {
+    background: rgba(0, 16, 33, 0.80);
+  }
 }
-
-
-
-
