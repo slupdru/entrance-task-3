@@ -32,7 +32,7 @@ class MainContainer extends React.Component {
             </div>
           </div>
           <div className="white-background" />
-          <Floors />
+          <Floors dateNow={this.props.dateNow} />
         </div>
       </main>
     );
