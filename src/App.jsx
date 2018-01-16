@@ -49,7 +49,7 @@ class App extends React.Component {
       <Header changeDateM={this.handleChandeDate} dateNow={this.state.dateNow}/>
       <Switch>
         <Route exact path="/" render={()=><MainContainer changeDateM={this.handleChandeDate} dateNow={this.state.dateNow}/>} />
-        <Route path="/NewMeet" component={NewMeet} /> 
+        <Route path="/NewMeet" render={()=><NewMeet/>} /> 
         <Route path="/EditMeet" component={NewMeet} />
       </Switch>
     </div>

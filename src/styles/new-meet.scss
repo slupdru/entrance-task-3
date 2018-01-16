@@ -145,7 +145,13 @@ input::placeholder {
   background-repeat: no-repeat;
   background-position: 95% 50%;
 }
-
+.react-datepicker-wrapper input{
+  width: 238px;
+  background-image: url(../assets/calendar.svg);
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  margin-right: 16px;
+}
 .start-end_separator {
   margin: 0px 4px;
 }

@@ -16,6 +16,7 @@ function Floor(props) {
           completed={room.completed}
           events={room.events}
           roomSubtitile={`${room.roomSubtitile}`}
+          dateNow={props.dateNow}
         />
       )}
     </div>

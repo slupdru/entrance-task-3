@@ -78,9 +78,7 @@ class FloorRow extends React.Component {
     let hash;
     if (this.state.mob === false) {
       width = document.getElementById("main_cont").clientWidth - 260;
-      hash = `/NewMeet#${this.props.id}|${mob}|${this.state.leftA /
-        width *
-        100}`;
+      hash = `/NewMeet#${this.props.id}|${mob}|${this.state.leftA /width *100}|${this.props.dateNow}`;
     } else {
       mob = 1;
       hash = `/NewMeet#${this.props.id}|${mob}|${this.state.leftA}`;

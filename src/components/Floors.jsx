@@ -63,7 +63,7 @@ class Floors extends React.Component {
         for (let k = 0; k < floorsMass.length; k++) {
           if (floorsMass[k] !== undefined) {
             for (let l = 0; l < floorsMass[k].length; l++) {
-              if ((this.props.data.events[j].room.id === floorsMass[k][l].key)&&(new Date(Date.parse(this.props.data.events[j].dateStart)).getDate()===this.props.dateNow.getDate())) {
+              if ((this.props.data.events[j].room.id === floorsMass[k][l].key)&&(new Date(Date.parse(this.props.data.events[j].dateStart)).getDate()===this.props.dateNow.getDate())&&(new Date(Date.parse(this.props.data.events[j].dateStart)).getYear()===this.props.dateNow.getYear())) {
                 floorsMass[k][l].events.push(this.props.data.events[j]);
               }
             }
@@ -78,6 +78,7 @@ class Floors extends React.Component {
               key={index}
               floorCount={index}
               rooms={floor}
+              dateNow={this.props.dateNow}
             />
           )}
         </div>

@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 function DateNow(props) {
+  let yearNow = props.dateProps.getYear();
   let dayNow = props.dateProps.getDate();
-  let month = props.dateProps.getMonth();
+  let monthNum = props.dateProps.getMonth();
 
   let datemass = [
     "января",
@@ -18,8 +19,9 @@ function DateNow(props) {
     "ноября",
     "декабря"
   ];
-  month = datemass[month];
-  if (dayNow === new Date().getDate()) {
+  let month = datemass[monthNum];
+  console.log(month);
+  if ((dayNow === new Date().getDate())&&(yearNow === new Date().getYear())&&(monthNum === new Date().getMonth())) {
     return (
       <a
         style={props.blue === true ? { color: "rgb(0, 112, 224)" } : {}}

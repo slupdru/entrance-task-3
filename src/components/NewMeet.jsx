@@ -13,6 +13,8 @@ import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { queue } from "async";
 import MembersShow from "./MembersShow";
+import DatePickerMY from "./DatePickerMY";
+
 
 let timeEnd, timeStart;
 let eventS;
@@ -60,7 +62,7 @@ class NewMeet extends React.Component {
       eventSelected: {},//выюранное событие
       themeInput: "",//value выбора темы обсуждения
       themeValid: false,//правильность ввода темы
-      dateInput: "",//value выбора даты
+      // dateInput: "",//value выбора даты
       dateValid: true,// правильность выбора даты
       startInput: "",// value выбора начала встречи
       startValid: false,//правильность ввода времени начала
@@ -89,6 +91,7 @@ class NewMeet extends React.Component {
     this.handleSendChangeClick = this.handleSendChangeClick.bind(this);
     this.handleCloseClickMemb = this.handleCloseClickMemb.bind(this);
     this.handleClickDel = this.handleClickDel.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
   }
   handleClickDel() {//нажатие кнопки "удалить встречу"
     this.setState({
@@ -96,30 +99,15 @@ class NewMeet extends React.Component {
     });
   }
   componentWillMount() {
-    let dayNow = new Date().getDate();//врменное решение установки даты
-    let month = new Date().getMonth();
-    this.setState({
-      _dayNow: dayNow,
-      _month: month
-    });
-    if (month < 10) {
-      month = `${0}${month + 1}`;
-    } else {
-      month = month + 1;
-    }
-    if (dayNow < 10) {
-      dayNow = `${0}${dayNow}`;
-    }
-    let fullDate = `${dayNow}. ${month}. 2018`;
-    this.setState({
-      dateInput: fullDate
-    });
+    let dateSlice;
     if (window.location.hash != "" && window.location.pathname === "/NewMeet") {//парсим хэш при создании новой встречи
       let pos1 = window.location.hash.indexOf("|", 0);
       let pos2 = window.location.hash.indexOf("|", pos1 + 1);
+      let pos3 = window.location.hash.indexOf("|", pos2 + 2);
       let id = window.location.hash.slice(1, pos1);
       let mob = window.location.hash.slice(pos1 + 1, pos2);
-      let left = window.location.hash.slice(pos2 + 1);
+      let left = window.location.hash.slice(pos2 + 1, pos3);
+      dateSlice = window.location.hash.slice(pos3 + 1);
       let hourStart;
       let hourEnd;
       let minutes;
@@ -172,6 +160,7 @@ class NewMeet extends React.Component {
         startValid: true
       });
     }
+
     if (
       window.location.hash != "" &&//парсим хэш при редактировании встречи
       window.location.pathname === "/EditMeet"
@@ -188,6 +177,36 @@ class NewMeet extends React.Component {
         }
       );
     }
+
+    let dateNOW = new Date(Date.parse(decodeURI(dateSlice)));
+    let dayNow = dateNOW.getDate();//врменное решение установки даты
+    let month = dateNOW.getMonth();
+    let year = dateNOW.getFullYear();
+    this.setState({
+      _dayNow: dayNow,
+      _month: month,
+      _year:year
+    });
+    if (month < 10) {
+      month = `${0}${month + 1}`;
+    } else {
+      month = month + 1;
+    }
+    if (dayNow < 10) {
+      dayNow = `${0}${dayNow}`;
+    }
+    let fullDate = `${dayNow}.${month}.2018`;
+    this.setState({
+      dateInput: fullDate
+    });
+    
+  }
+  handleChangeDate(mom){
+    this.setState({
+      _month:mom.month(),
+      _dayNow:mom.date(),
+      _year:mom.year()
+    }, ()=>console.log(this.state._dayNow))
   }
   handleSendChangeClick() {//кнопка 'созранить'
     if (this.state.loadEditMeet === false) {
@@ -386,6 +405,21 @@ class NewMeet extends React.Component {
           );
         }
         break;
+
+      case "dateInput":
+      {
+        this.setState(
+          {
+            dateInput: inpVal
+          },
+          ()=>{
+            let hours = this.state.dateInput.slice(0, 2);
+            let minutes = this.state.dateInput.slice(3, 5);
+          }
+        )
+      }
+      break;
+
       case "endInput":
         {
           this.setState(
@@ -598,7 +632,7 @@ class NewMeet extends React.Component {
           />
           <main
             className={
-              this.props.location.pathname === `/NewMeet`
+              window.location.pathname === "/NewMeet"
                 ? `main-new-meet`
                 : `main-new-meet main-edit-meet`
             }
@@ -606,7 +640,7 @@ class NewMeet extends React.Component {
             <div className="main_background">
               <div className="nmeet-container">
                 <div className="title-line">
-                  {this.props.location.pathname === `/NewMeet`
+                  {window.location.pathname === "/NewMeet"
                     ? <div className="title-line_title">Новая встреча</div>
                     : <div className="title-line_title">
                         Редактирование встречи
@@ -644,25 +678,27 @@ class NewMeet extends React.Component {
                   </div>
                   <div className="time">
                     <div
-                      className={
-                        this.state.dateValid === true ||
-                        (this.state.dateInput === "" &&
-                          this.state.showError === false)
-                          ? `date`
-                          : `date input_valid_err`
-                      }
+                      className="date"
+                      // {
+                      //   this.state.dateValid === true ||
+                      //   (this.state.dateInput === "" &&
+                      //     this.state.showError === false)
+                      //     ? `date`
+                      //     : `date input_valid_err`
+                      // }
                     >
                       <div className="theme_title">Дата</div>
-                      <input
+                      {/* <input
                         className="date_input"
                         id="dateInput"
                         value={this.state.dateInput}
                         onChange={this.handleChange}
                         type="text"
-                      />
-                      <div className="input_error">
+                      /> */}
+                      <DatePickerMY changeDate={this.handleChangeDate}/>
+                      {/* <div className="input_error">
                         Формат даты (dd.mm.yyyy)
-                      </div>
+                      </div> */}
                     </div>
                     <div className="start-end">
                       <div
