@@ -11,9 +11,8 @@ class Timebar extends React.Component {
     super(props);
 
     this.state = {
-      date: new Date()
+      clicked:false
     };
-    this.tick = this.tick.bind(this);
     this.handleClickDate = this.handleClickDate.bind(this);
   }
 
@@ -23,19 +22,8 @@ class Timebar extends React.Component {
     });
   }
 
-  componentDidMount() {
-    this.interval = setInterval(this.tick, minute);
-  }
-
-  tick() {
-    let NewDate = new Date(this.state.date.getTime() + minute);
-    this.setState({
-      date: NewDate,
-      clicked: false
-    });
-  }
   render() {
-    let dateMy = this.state.date;
+    let dateMy = this.props.dateNow;
     let hours = dateMy.getHours();
     let minutes = dateMy.getMinutes();
     if (minutes < 10) {
@@ -46,7 +34,8 @@ class Timebar extends React.Component {
         <div className="timebar_main-container">
           <div className="timebar_date-container">
             <Calendar displayB={this.state.clicked} />
-            <div className="timebar_arrow-container">
+            {console.log(this.state.clicked)}
+            <div onClick={()=>this.props.changeDateT('arrow','left')} className="timebar_arrow-container">
               <img
                 className="timebar_img_left"
                 src="assets/arrow2.svg"
@@ -58,7 +47,7 @@ class Timebar extends React.Component {
               clickDate={this.handleClickDate}
               dateProps={dateMy}
             />
-            <div className="timebar_arrow-container">
+            <div onClick={()=>this.props.changeDateT('arrow','right')} className="timebar_arrow-container">
               <img
                 className="timebar_img_right"
                 src="assets/arrow.svg"

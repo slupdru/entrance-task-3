@@ -6,18 +6,54 @@ import Header from "./components/Header";
 import MainContainer from "./components/MainContainer";
 import NewMeet from "./components/NewMeet";
 import ModalNewMeet from "./components/ModalNewMeet";
+const minute = 1000 * 60;
 
-function App() {
+class App extends React.Component {
+  constructor(props){
+    super(props);
+  this.state = {
+    dateNow: new Date()
+  }
+  this.handleChandeDate = this.handleChandeDate.bind(this);
+  this.tick = this.tick.bind(this);
+  }
+  componentDidMount() {
+    this.interval = setInterval(this.tick, minute);
+  }
+
+  tick() {
+    let NewDate = new Date(this.state.dateNow.getTime() + minute);
+    this.setState({
+      dateNow: NewDate
+    },()=>console.log(this.state.dateNow) );
+  }
+
+  handleChandeDate(type, side){
+    if (type === 'arrow'){
+      const DAY = 1000*60*60*24;
+      side==='right'?
+      this.setState({
+        dateNow:new Date(this.state.dateNow.getTime()+DAY)
+      },()=>console.log(this.state.dateNow))
+      :
+      this.setState({
+        dateNow:new Date(this.state.dateNow.getTime()-DAY)
+      },()=>console.log(this.state.dateNow))
+    }
+  }
+
+  render(){
   return (
     <div>
       <ModalNewMeet />
-      <Header />
+      <Header changeDateM={this.handleChandeDate} dateNow={this.state.dateNow}/>
       <Switch>
-        <Route exact path="/" component={MainContainer} />
+        <Route exact path="/" render={()=><MainContainer changeDateM={this.handleChandeDate} dateNow={this.state.dateNow}/>} />
         <Route path="/NewMeet" component={NewMeet} /> 
         <Route path="/EditMeet" component={NewMeet} />
       </Switch>
     </div>
-  );
+  )
+}
 }
 export default App;

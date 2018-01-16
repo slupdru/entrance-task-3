@@ -2,11 +2,13 @@ import React from "react";
 import Floors from "./Floors";
 import Timebar from "./Timebar";
 class MainContainer extends React.Component {
-  componentWillMount() {}
+  constructor(props){
+    super(props);
+  }
   render() {
     return (
       <main>
-        <Timebar />
+        <Timebar changeDateT={this.props.changeDateM} dateNow={this.props.dateNow}/>
         {/* Сетка с временными интрвалами */}
         <div className="main-container" id="main_cont">
           <div className="linear-back">

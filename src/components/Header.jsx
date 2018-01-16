@@ -19,7 +19,7 @@ class Header extends React.Component {
   }
 
   render() {
-    let dateMy = new Date();
+    let dateMy = this.props.dateNow;
     return (
       <header>
         <div className="header_container">
@@ -31,6 +31,7 @@ class Header extends React.Component {
           path="/"
           render={() =>
             <CalendarSelector
+              changeDateC={this.props.changeDateM}
               date={dateMy}
               clicked={this.state.clicked}
               ClickDate={this.handleClickDate}

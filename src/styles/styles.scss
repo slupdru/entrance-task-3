@@ -12,6 +12,7 @@ body {
 }
 header {
   box-shadow: 0 1px 0 0 #e9ecef;
+  user-select: none;
 }
 .header_container {
   display: flex;
@@ -95,6 +96,7 @@ header {
 .timebar {
   box-shadow: 0 1px 0 0 #e9ecef;
   display: flex;
+  user-select: none;
 }
 .timebar_main-container {
   margin-top: 11px;

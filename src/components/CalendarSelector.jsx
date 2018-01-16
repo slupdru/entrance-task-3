@@ -6,7 +6,7 @@ function CalendarSelector(props) {
     <div className="timebar_date-container timebar_date-container-mobile">
       <div className="timebar_mobile-container">
         <Calendar displayB={props.clicked} />
-        <div className="timebar_arrow-container">
+        <div onClick={()=>props.changeDateC('arrow','left')} className="timebar_arrow-container">
           <img className="timebar_img_left" src="assets/arrow2.svg" alt="" />
         </div>
         <DateNow //компонент показывает текущую дату
@@ -14,7 +14,7 @@ function CalendarSelector(props) {
           clickDate={props.ClickDate}
           dateProps={props.date}
         />
-        <div className="timebar_arrow-container">
+        <div onClick={()=>props.changeDateC('arrow','right')} className="timebar_arrow-container">
           <img className="timebar_img_right" src="assets/arrow.svg" alt="" />
         </div>
       </div>
