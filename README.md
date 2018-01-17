@@ -8,7 +8,7 @@ npm start
 ```  
 Сервер находится отдельно в репозитории первого задания. https://github.com/slupdru/entrance-task-1-duplicate
 Используется прокси на http://localhost:3000, настройки сервера находятся в webpack.config.js.  
-Использовал React, Webpack, Babel, Webpack-dev-server, React-router. Для связи с сервером GraphQL использовался Apollo.  
+Использовал React, Webpack, Babel, Webpack-dev-server, React-router. Для связи с сервером GraphQL использовался Apollo. Так-же Moment.js, ReactJS Datepicker для работы с временем.   
 
 До момента написания вступительного задания не работал ни с одним js-фреймворком,
 React изучал по ходу выполнения задания. В связи с этим мой код возможно (точно) 
