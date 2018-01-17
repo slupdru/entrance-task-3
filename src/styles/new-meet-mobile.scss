@@ -148,6 +148,9 @@
   .message-line_visible {
     display: flex;
   }
+  .react-datepicker-wrapper input{
+    width:328px;
+  }
 }
 
 @media screen and (max-width: 328px) {
@@ -168,6 +171,7 @@
       display: block;
       width: 103px;
     }
+
     .buttons-container_delete {
       display: none;
     }

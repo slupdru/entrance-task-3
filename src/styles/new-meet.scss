@@ -152,6 +152,28 @@ input::placeholder {
   background-position: 95% 50%;
   margin-right: 16px;
 }
+.list_memb-block{
+  height: 34px;
+  display: flex;
+
+  .membres-show_icon{
+    margin:  auto 8px auto 16px;
+    
+  }
+  .list_name{
+    margin:  auto 0;
+    font-size: 13px;
+    color: #000000;
+    letter-spacing: 0;
+  }
+  .item_floor{
+    font-size: 13px;
+    color: #37003E;
+    letter-spacing: 0;
+    line-height: 15px;
+  }
+}
+
 .start-end_separator {
   margin: 0px 4px;
 }

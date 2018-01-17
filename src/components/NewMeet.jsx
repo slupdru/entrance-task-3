@@ -14,6 +14,7 @@ import gql from "graphql-tag";
 import { queue } from "async";
 import MembersShow from "./MembersShow";
 import DatePickerMY from "./DatePickerMY";
+import AutoCompleteMY from "./AutoCompleteMY";
 
 
 let timeEnd, timeStart;
@@ -62,13 +63,11 @@ class NewMeet extends React.Component {
       eventSelected: {},//выюранное событие
       themeInput: "",//value выбора темы обсуждения
       themeValid: false,//правильность ввода темы
-      // dateInput: "",//value выбора даты
       dateValid: true,// правильность выбора даты
       startInput: "",// value выбора начала встречи
       startValid: false,//правильность ввода времени начала
       endInput: "",//value времени окончания события
       endValid: false,//правильность ввода окончания события
-      membInput: "",//value ввода участников встречи
       usersInNewMeet: [],//участники встречи
       showError: false,//показать ошибки
       roomSelectedId: -1,//id выбранной комнаты 
@@ -79,9 +78,9 @@ class NewMeet extends React.Component {
       _year: new Date().getFullYear(),//текущий год
       dateNow:-1
     };
+    this._getMembUsers = this._getMembUsers.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getRecomendation = this.getRecomendation.bind(this);
-    this.getUsers = this.getUsers.bind(this);
     this._handleKeyPress = this._handleKeyPress.bind(this);
     this.sortR = this.sortR.bind(this);
     this.startEndValidation = this.startEndValidation.bind(this);
@@ -402,34 +401,18 @@ class NewMeet extends React.Component {
           );
         }
         break;
-      case "membInput":
-        {
-          if (this.state.selectUserLoad === false) {
-            let users = eventS.users;
-            this.setState(
-              {
-                selectUserLoad: true,
-                usersInNewMeet: users
-              }
-            );
-          }
-          this.setState({
-            membInput: inpVal
-          });
-        }
-        break;
     }
   }
 
-  getUsers() {
+  _getMembUsers(value){
     for (let i = 0; i < this.props.data.users.length; i++) {
-      if (this.state.membInput === this.props.data.users[i].login) {
+      if (value === this.props.data.users[i].login) {
         this.setState({
           usersInNewMeet: [
             ...this.state.usersInNewMeet,
             this.props.data.users[i]
           ]
-        });
+        }, console.log(this.state.usersInNewMeet));
       }
     }
   }
@@ -495,6 +478,7 @@ class NewMeet extends React.Component {
   }
 
   render() {
+    let value = 'тест';
     let start, end;
     let path = window.location.pathname;
     let rooms = [];
@@ -719,22 +703,14 @@ class NewMeet extends React.Component {
                   <div className="members">
                     <div
                       className={
-                        this.state.usersInNewMeet.length !== 0 ||
-                        (this.state.membInput === "" &&
-                          this.state.showError === false)
-                          ? `members_input-block`
-                          : `members_input-block input_valid_err`
+                        (this.state.usersInNewMeet.length === 0 && this.state.showError === true)
+                          ? `members_input-block input_valid_err`
+                          : `members_input-block `
                       }
                     >
                       <div className="theme_title">Участники</div>
-                      <input
-                        id="membInput"
-                        onKeyPress={this._handleKeyPress}
-                        value={this.state.membInput}
-                        onChange={this.handleChange}
-                        className="members_input awesomplete"
-                        type="text"
-                      />
+                    <AutoCompleteMY addUser={this._getMembUsers} list={this.props.data.users}/>
+
                       <div className="input_error">
                         Cписок не должен быть пуст
                       </div>
