@@ -30,7 +30,6 @@ class FooterInEdit extends React.Component {//футер для страницы
     this.onClick = this.onClick.bind(this);
   }
   onClick() {
-    this.props.sendChangeClick();
     if (this.props._showErrorFun() === true) {
       let massOfUsers = [];
       for (let i = 0; i < this.props.usersInNewMeet.length; i++) {

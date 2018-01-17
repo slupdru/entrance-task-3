@@ -12,7 +12,21 @@ class DatePickerMY extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
- 
+ componentWillMount(){
+   if (this.props.dateStart!==undefined){
+  
+   
+    this.setState({
+      startDate: new moment(Date.parse(this.props.dateStart))
+    },()=>this.props.changeDate(this.state.startDate));
+  }
+  if (this.props.dateNow!==-1){
+    this.setState({
+      startDate: new moment(this.props.dateNow.getTime())
+    })
+  }
+ }
+
   handleChange(date) {
     this.setState({
       startDate: date

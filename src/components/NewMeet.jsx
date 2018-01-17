@@ -74,9 +74,10 @@ class NewMeet extends React.Component {
       roomSelectedId: -1,//id выбранной комнаты 
       roomSelectedfloor: -1,//этаж выбранной комнаты
       indexRoom: -1,//index в массиве, выбранной комнаты
-      _month: 0,//текущий месяц
-      _dayNow: 0,//текущий день
-      _year: 2018//текущий год
+      _month: new Date().getMonth(),//текущий месяц
+      _dayNow: new Date().getDate(),//текущий день
+      _year: new Date().getFullYear(),//текущий год
+      dateNow:-1
     };
     this.handleChange = this.handleChange.bind(this);
     this.getRecomendation = this.getRecomendation.bind(this);
@@ -88,7 +89,6 @@ class NewMeet extends React.Component {
     this.handleRoomClick = this.handleRoomClick.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.setDate = this.setDate.bind(this);
-    this.handleSendChangeClick = this.handleSendChangeClick.bind(this);
     this.handleCloseClickMemb = this.handleCloseClickMemb.bind(this);
     this.handleClickDel = this.handleClickDel.bind(this);
     this.handleChangeDate = this.handleChangeDate.bind(this);
@@ -99,7 +99,6 @@ class NewMeet extends React.Component {
     });
   }
   componentWillMount() {
-    let dateSlice;
     if (window.location.hash != "" && window.location.pathname === "/NewMeet") {//парсим хэш при создании новой встречи
       let pos1 = window.location.hash.indexOf("|", 0);
       let pos2 = window.location.hash.indexOf("|", pos1 + 1);
@@ -107,7 +106,7 @@ class NewMeet extends React.Component {
       let id = window.location.hash.slice(1, pos1);
       let mob = window.location.hash.slice(pos1 + 1, pos2);
       let left = window.location.hash.slice(pos2 + 1, pos3);
-      dateSlice = window.location.hash.slice(pos3 + 1);
+       let dateSlice = window.location.hash.slice(pos3 + 1);
       let hourStart;
       let hourEnd;
       let minutes;
@@ -151,15 +150,26 @@ class NewMeet extends React.Component {
       if (minutes < 10) {
         minutes = `0${minutes}`;
       }
+      let dateNOW = new Date(Date.parse(decodeURI(dateSlice)));
+      let dayNow = dateNOW.getDate();
+      let month = dateNOW.getMonth();
+      let year = dateNOW.getFullYear();
+      console.log(dayNow, month, year);
       this.setState({
         roomSelectedId: id,
         indexRoom: 0,
         startInput: `${hourStart}:${minutes}`,
         endInput: `${hourEnd}:${minutes}`,
         endValid: true,
-        startValid: true
+        startValid: true,
+        _dayNow: dayNow,
+        _month: month,
+        _year:year,
+        dateNow:dateNOW
       });
     }
+
+
 
     if (
       window.location.hash != "" &&//парсим хэш при редактировании встречи
@@ -178,41 +188,14 @@ class NewMeet extends React.Component {
       );
     }
 
-    let dateNOW = new Date(Date.parse(decodeURI(dateSlice)));
-    let dayNow = dateNOW.getDate();//врменное решение установки даты
-    let month = dateNOW.getMonth();
-    let year = dateNOW.getFullYear();
-    this.setState({
-      _dayNow: dayNow,
-      _month: month,
-      _year:year
-    });
-    if (month < 10) {
-      month = `${0}${month + 1}`;
-    } else {
-      month = month + 1;
-    }
-    if (dayNow < 10) {
-      dayNow = `${0}${dayNow}`;
-    }
-    let fullDate = `${dayNow}.${month}.2018`;
-    this.setState({
-      dateInput: fullDate
-    });
     
   }
   handleChangeDate(mom){
-    this.setState({
-      _month:mom.month(),
-      _dayNow:mom.date(),
-      _year:mom.year()
-    }, ()=>console.log(this.state._dayNow))
-  }
-  handleSendChangeClick() {//кнопка 'созранить'
     if (this.state.loadEditMeet === false) {
       let title = eventS.title;
       this.setState(
         {
+          selectUserLoad:true,
           loadEditMeet: true,
           themeInput: title,
           startInput: timeStart,
@@ -223,8 +206,19 @@ class NewMeet extends React.Component {
           yourRoomSwow: false,
           usersInNewMeet: eventS.users
         }
-      );
+      ), ()=>this.setState({
+        _month:mom.month(),
+        _dayNow:mom.date(),
+        _year:mom.year()
+      }, ()=>console.log(this.state._dayNow));
     }
+    else{
+    this.setState({
+      _month:mom.month(),
+      _dayNow:mom.date(),
+      _year:mom.year()
+    }, ()=>console.log(this.state._dayNow))
+  }
   }
   handleCloseClick() {//отменить выбор комнаты
     this.setState({
@@ -260,22 +254,6 @@ class NewMeet extends React.Component {
     }
   }
   handleCloseClickMemb(id) {//удалить пользователя
-    if (this.state.selectUserLoad === false) {
-      let users = eventS.users;
-      let title = eventS.title;
-      this.setState(
-        {
-          loadEditMeet: true,
-          themeInput: title,
-          startInput: timeStart,
-          endInput: timeEnd,
-          themeValid: true,
-          startValid: true,
-          endValid: true,
-          selectUserLoad: true,
-          usersInNewMeet: users
-        },
-        () => {
           let members = this.state.usersInNewMeet.filter(
             user => user.id !== id
           );
@@ -288,19 +266,6 @@ class NewMeet extends React.Component {
             usersInNewMeet: members
           });
         }
-      );
-    } else {
-      let members = this.state.usersInNewMeet.filter(user => user.id !== id);
-      if (members.length === 0) {
-        this.setState({
-          roomSelectedId: -1
-        });
-      }
-      this.setState({
-        usersInNewMeet: members
-      });
-    }
-  }
   _handleKeyPress(event) {//добавление пользователя по нажатию enter
     if (event.key === "Enter") {
       this.getUsers();
@@ -339,19 +304,6 @@ class NewMeet extends React.Component {
   handleChange(event) {//изменение значения inputов
     let inpVal = event.target.value;
     let id = event.target.id;
-    if (this.state.loadEditMeet === false) {
-      let title = eventS.title;
-      this.setState({
-        loadEditMeet: true,
-        themeInput: title,
-        startInput: timeStart,
-        endInput: timeEnd,
-        themeValid: true,
-        startValid: true,
-        endValid: true,
-        usersInNewMeet: eventS.users
-      });
-    }
     switch (id) {
       case "themeInput":
         {
@@ -520,16 +472,17 @@ class NewMeet extends React.Component {
           rooms.splice(i, 1);
         }
         for (let j = 0; j < this.props.data.events.length; j++) {
-          if (
-            (Date.parse(this.props.data.events[j].dateStart) <=
+          if ((rooms[i]!==undefined)&&
+            ((Date.parse(this.props.data.events[j].dateStart) <=
               start.getTime() &&
               Date.parse(this.props.data.events[j].dateEnd) >=
                 start.getTime() &&
               this.props.data.events[j].room.id === rooms[i].id) ||
             (end.getTime() >= Date.parse(this.props.data.events[j].dateStart) &&
-              Date.parse(this.props.data.events[j].dateEnd) >= end.getTime() &&
+              Date.parse(this.props.data.events[j].dateEnd) >= end.getTime() 
+              &&
               this.props.data.events[j].room.id === rooms[i].id)
-          ) {
+          )) {
             rooms.splice(i, 1);
           }
         }
@@ -583,6 +536,7 @@ class NewMeet extends React.Component {
         for (let i = 0; i < this.props.data.events.length; i++) {
           if (this.props.data.events[i].id === this.state.eventSelectedId) {
             eventS = this.props.data.events[i];
+            console.log(eventS);
           }
         }
         if (this.state.roomSelectedId !== -1) {
@@ -695,7 +649,7 @@ class NewMeet extends React.Component {
                         onChange={this.handleChange}
                         type="text"
                       /> */}
-                      <DatePickerMY changeDate={this.handleChangeDate}/>
+                      <DatePickerMY dateNow={this.state.dateNow} dateStart={eventS!==undefined?eventS.dateStart:undefined}  changeDate={this.handleChangeDate}/>
                       {/* <div className="input_error">
                         Формат даты (dd.mm.yyyy)
                       </div> */}
@@ -868,6 +822,7 @@ class NewMeet extends React.Component {
                   endStr={rooms.end}
                 />}
             />
+            {console.log(this.state.themeInput)}
             <Route
               path="/EditMeet"
               render={() =>
