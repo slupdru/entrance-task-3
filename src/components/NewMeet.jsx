@@ -709,6 +709,8 @@ class NewMeet extends React.Component {
                       }
                     >
                       <div className="theme_title">Участники</div>
+
+
                     <AutoCompleteMY addUser={this._getMembUsers} list={this.props.data.users}/>
 
                       <div className="input_error">

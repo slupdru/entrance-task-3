@@ -16,11 +16,10 @@ class AutoCompleteMY extends React.Component {
           items={this.props.list}
           shouldItemRender={(item, value) => item.login.toLowerCase().indexOf(value.toLowerCase()) > -1}
           getItemValue={item => item.login}
-          renderInput={{className=""}}
           renderItem={(item, highlighted) =>
             <div className={'list_memb-block'}
               key={item.id}
-              style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
+              style={{ backgroundColor: highlighted ? '#eee' : '#fff'}}
             >
                 <img className='membres-show_icon' src={item.avatarUrl} alt=""/>
                 <div className="list_name"><span>{item.login}</span><span className="item_floor"> · {item.homeFloor} этаж</span></div>

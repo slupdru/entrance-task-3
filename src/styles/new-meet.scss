@@ -97,6 +97,9 @@
 .members_input {
   width: 100%;
 }
+.members_input-block div:nth-of-type(2) {
+  width: 100%;
+}
 .input_valid_err {
   position: relative;
 }
@@ -122,6 +125,9 @@ input {
   border-radius: 4px;
   padding-left: 10px;
   outline: none;
+}
+input[role="combobox"]{
+  width: 100%;
 }
 input:hover {
   border: 2px solid #007dff;
