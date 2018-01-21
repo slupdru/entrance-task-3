@@ -8,7 +8,7 @@ class MainContainer extends React.Component {
   render() {
     return (
       <main>
-        <Timebar changeDateT={this.props.changeDateM} dateNow={this.props.dateNow}/>
+        <Timebar changeDateCalendarT={this.props.changeDateCalendarM} changeDateT={this.props.changeDateM} dateNow={this.props.dateNow}/>
         {/* Сетка с временными интрвалами */}
         <div className="main-container" id="main_cont">
           <div className="linear-back">

@@ -126,10 +126,23 @@ header {
   margin-left: 24px;
   position: relative;
 }
-
+body .CalendarDay__selected, body .CalendarDay__selected:active, body .CalendarDay__selected:hover {
+  background: rgb(0, 112, 224);
+  border: 1px solid rgb(0, 112, 224);
+  color: #fff;
+}
+body .DayPickerKeyboardShortcuts_show__bottomRight, body .DayPickerKeyboardShortcuts_show__bottomRight:hover, body .DayPickerKeyboardShortcuts_show__bottomRight:active{
+  border-right: 33px solid rgb(0, 112, 224);
+}
+.SingleDatePicker_picker.SingleDatePicker_picker_1{
+  transform: translate(-62px,-30px);
+  background: #FFFFFF;
+  box-shadow: 0 1px 8px 0 rgba(0,44,92,0.28);
+  border-radius: 4px;
+}
 .timebar_date {
   text-align: center;
-  width: 115px;
+  min-width: 115px;
   font-size: 15px;
   line-height: 18px;
   color: #000000;
@@ -162,21 +175,17 @@ header {
   margin-top: 5px;
   position: relative;
 }
+.SingleDatePicker.SingleDatePicker_1{
+    position: absolute;
+    top: -5px;
+    left: 38px;
+    width: 115px;
+    z-index: 10;
+}
+.SingleDatePickerInput.SingleDatePickerInput_1{
+  opacity: 0;
+}
 
-.timebar_date-container {
-  display: flex;
-  margin-left: 24px;
-}
-.timebar_date {
-  font-size: 15px;
-  line-height: 18px;
-  color: #000000;
-  letter-spacing: 0px;
-  margin: 4px 15px;
-  font-weight: 500;
-  cursor: pointer;
-  user-select: none;
-}
 .time-container_hours {
   font-size: 11px;
   color: #252525;

@@ -46,6 +46,8 @@
     "image-webpack-loader": "^3.4.2",
     "moment": "^2.20.1",
     "node-sass": "^4.7.2",
+    "react-addons-shallow-compare": "^15.6.2",
+    "react-dates": "^16.2.0",
     "react-router": "^4.2.0",
     "react-router-native": "^4.2.0",
     "sass-loader": "^6.0.6",

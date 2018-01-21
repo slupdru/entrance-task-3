@@ -3,23 +3,21 @@ import "../assets/arrow.svg";
 import "../assets/arrow2.svg";
 import DateNow from "./DateNow";
 import HoursInTimeBar from "./HoursInTimeBar";
-import Calendar from "./Calendar";
-const minute = 1000 * 60;
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import { DateRangePicker, SingleDatePicker, DayPickerRangeController} from 'react-dates';
+import moment from 'moment';
 
+const minute = 1000 * 60;
+let momentMy = new moment();
+momentMy.locale('ru');
 class Timebar extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      clicked:false
+      date:momentMy,
+      focused:false
     };
-    this.handleClickDate = this.handleClickDate.bind(this);
-  }
-
-  handleClickDate(event) {
-    this.setState({
-      clicked: !this.state.clicked
-    });
   }
 
   render() {
@@ -33,8 +31,6 @@ class Timebar extends React.Component {
       <div className="timebar">
         <div className="timebar_main-container">
           <div className="timebar_date-container">
-            <Calendar displayB={this.state.clicked} />
-            {console.log(this.state.clicked)}
             <div onClick={()=>this.props.changeDateT('arrow','left')} className="timebar_arrow-container">
               <img
                 className="timebar_img_left"
@@ -43,9 +39,23 @@ class Timebar extends React.Component {
               />
             </div>
             <DateNow
-              blue={this.state.clicked}
+              blue={this.state.focused}
               clickDate={this.handleClickDate}
               dateProps={dateMy}
+            />
+            < SingleDatePicker
+              date={this.state.date} 
+              numberOfMonths={3}
+              isOutsideRange={()=>{}}
+              onDateChange={date =>
+                { 
+                this.setState({ date });
+                this.props.changeDateCalendarT(date);
+              }
+            } 
+              focused={this.state.focused} 
+              onFocusChange={({ focused }) => this.setState({ focused })}
+              noBorder={true}
             />
             <div onClick={()=>this.props.changeDateT('arrow','right')} className="timebar_arrow-container">
               <img

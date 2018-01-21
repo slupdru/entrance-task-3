@@ -550,7 +550,7 @@ class NewMeet extends React.Component {
           hoursEnd = `0${hoursEnd}`;
         }
         if (minutesEnd < 10) {
-          minutesEnd = `0${minutesStart}`;
+          minutesEnd = `0${minutesEnd}`;
         }
         timeStart = `${hoursStart}:${minutesStart}`;
         timeEnd = `${hoursEnd}:${minutesEnd}`;

@@ -3,6 +3,7 @@ import "../assets/edit.svg";
 function ModalInCell(props) {
   let dayNow = props.start.getDate();
   let month = props.start.getMonth();
+  
   let timeMeet = `${props.start.getHours()}:${props.start.getMinutes() < 10
     ? `0${props.start.getMinutes()}`
     : `${props.start.getMinutes()}`} — ${props.end.getHours()}:${props.end.getMinutes() <

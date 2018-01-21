@@ -35,7 +35,15 @@
   .timebar_mobile-container {
     width: 328px;
     justify-content: center;
-  }
+    position: relative
+   }
+   .SingleDatePicker_picker.SingleDatePicker_picker_1{
+    transform: translate(-120px, -30px);
+   }
+   .SingleDatePicker.SingleDatePicker_1{
+    top: -3px;
+    left: 106px;
+   }
   .timebar_date {
     margin: 4px 52px;
   }

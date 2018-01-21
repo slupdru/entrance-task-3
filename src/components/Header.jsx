@@ -6,16 +6,6 @@ import CalendarSelector from "./CalendarSelector";
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClickDate = this.handleClickDate.bind(this);
-    this.state = {
-      clicked: false
-    };
-  }
-
-  handleClickDate(event) {
-    this.setState({
-      clicked: !this.state.clicked
-    });
   }
 
   render() {
@@ -31,10 +21,9 @@ class Header extends React.Component {
           path="/"
           render={() =>
             <CalendarSelector
+              changeDateCalendarC={this.props.changeDateCalendarM}
               changeDateC={this.props.changeDateM}
               date={dateMy}
-              clicked={this.state.clicked}
-              ClickDate={this.handleClickDate}
             />}
         />
       </header>

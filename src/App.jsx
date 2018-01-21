@@ -16,6 +16,7 @@ class App extends React.Component {
   }
   this.handleChandeDate = this.handleChandeDate.bind(this);
   this.tick = this.tick.bind(this);
+  this.handleChangeDateInCalendar= this.handleChangeDateInCalendar.bind(this);
   }
   componentDidMount() {
     this.interval = setInterval(this.tick, minute);
@@ -41,14 +42,22 @@ class App extends React.Component {
       },()=>console.log(this.state.dateNow))
     }
   }
-
+  handleChangeDateInCalendar(dateCalParm){
+    let newDate = this.state.dateNow;
+    newDate.setDate(dateCalParm.date());
+    newDate.setMonth(dateCalParm.month());
+    newDate.setFullYear(dateCalParm.year());
+    this.setState({
+      dateNow:newDate
+    }, ()=>{console.log(this.state.dateNow)})
+  }
   render(){
   return (
     <div>
       <ModalNewMeet />
-      <Header changeDateM={this.handleChandeDate} dateNow={this.state.dateNow}/>
+      <Header changeDateCalendarM={this.handleChangeDateInCalendar} changeDateM={this.handleChandeDate} dateNow={this.state.dateNow}/>
       <Switch>
-        <Route exact path="/" render={()=><MainContainer changeDateM={this.handleChandeDate} dateNow={this.state.dateNow}/>} />
+        <Route exact path="/" render={()=><MainContainer changeDateCalendarM={this.handleChangeDateInCalendar} changeDateM={this.handleChandeDate} dateNow={this.state.dateNow}/>} />
         <Route path="/NewMeet" render={()=><NewMeet/>} /> 
         <Route path="/EditMeet" component={NewMeet} />
       </Switch>
