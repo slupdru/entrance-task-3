@@ -448,25 +448,49 @@ class NewMeet extends React.Component {
 
   getRecomendation(rooms, nonval) {//рекомендованные встречи
     let [start, end] = this.setDate();
+    let delcount = 0;
     let capacityprop = this.state.usersInNewMeet.length;
     if (nonval === false) {
       for (let i = 0; i < rooms.length; i++) {
         if (rooms[i].capacity < capacityprop) {
-          rooms.splice(i, 1);
+          delete rooms[i];
+          delcount=delcount+1;
         }
         for (let j = 0; j < this.props.data.events.length; j++) {
           if ((rooms[i]!==undefined)&&
-            ((Date.parse(this.props.data.events[j].dateStart) <=
+          (
+            (((Date.parse(this.props.data.events[j].dateStart) <=
               start.getTime() &&
               Date.parse(this.props.data.events[j].dateEnd) >=
-                start.getTime() &&
+                start.getTime() )&&
               this.props.data.events[j].room.id === rooms[i].id) ||
-            (end.getTime() >= Date.parse(this.props.data.events[j].dateStart) &&
-              Date.parse(this.props.data.events[j].dateEnd) >= end.getTime() 
-              &&
+
+              ((Date.parse(this.props.data.events[j].dateStart) <=
+              end.getTime() &&
+              Date.parse(this.props.data.events[j].dateEnd) >=
+                end.getTime()) &&
               this.props.data.events[j].room.id === rooms[i].id)
-          )) {
-            rooms.splice(i, 1);
+          )
+
+          ||
+
+          (((start.getTime()  <=
+          Date.parse(this.props.data.events[j].dateStart) &&
+          Date.parse(this.props.data.events[j].dateStart) <=
+            end.getTime()) &&
+          this.props.data.events[j].room.id === rooms[i].id) ||
+
+        ((start.getTime()  <=
+          Date.parse(this.props.data.events[j].dateEnd) &&
+          Date.parse(this.props.data.events[j].dateEnd) <=
+            end.getTime()) &&
+          this.props.data.events[j].room.id === rooms[i].id)
+        )
+
+        )
+       ) {
+            delete rooms[i];
+            delcount=delcount+1;
           }
         }
       }
@@ -474,7 +498,14 @@ class NewMeet extends React.Component {
     }
     rooms.start = `${this.state.startInput}`;
     rooms.end = `${this.state.endInput}`;
-    return rooms;
+
+      if (delcount===rooms.length){
+        return [];
+      }
+      else{
+        return rooms;
+      }
+    
   }
 
   render() {
@@ -749,7 +780,8 @@ class NewMeet extends React.Component {
                         : "Ваша переговорка"}
                     </div>
                     {this.state.roomSelectedId === -1
-                      ? rooms.map((room, index) =>
+                      ? rooms.length !== 0
+                      ?  rooms.map((room, index) =>
                           <SelectRoomBlock
                             closeClick={this.handleCloseClick}
                             indexRoom={index}
@@ -761,8 +793,9 @@ class NewMeet extends React.Component {
                             floor={room.floor}
                             end={rooms.end}
                             start={rooms.start}
-                          />
+                          /> 
                         )
+                        : <div>Вы не ввели данные или все переговорки на данное время заняты(</div>
                       : rooms.length !== 0
                         ? <SelectRoomBlock
                             closeClick={this.handleCloseClick}
