@@ -83,7 +83,7 @@ class Floors extends React.Component {
           )}
         </div>
       );
-    } else return <div>Loading...</div>;
+    } else return <div className="load_container"><div className="load"><hr/><hr/><hr/><hr/></div></div>;
   }
 }
 

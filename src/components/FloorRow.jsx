@@ -81,7 +81,7 @@ class FloorRow extends React.Component {
       hash = `/NewMeet#${this.props.id}|${mob}|${this.state.leftA /width *100}|${this.props.dateNow}`;
     } else {
       mob = 1;
-      hash = `/NewMeet#${this.props.id}|${mob}|${this.state.leftA}`;
+      hash = `/NewMeet#${this.props.id}|${mob}|${this.state.leftA}|${this.props.dateNow}`;
     }
 
     if (this.props.events[0] === undefined) {

@@ -17,14 +17,28 @@ class MeetBlock extends React.Component {
     let colorMeet;
     this.state.clicked === false ? (colorMeet = "") : (colorMeet = "#99A9B9");
     const HOUR = 1000 * 60 * 60;
-    let leftInPr =//считаем  значение left для встречи в процентах, исходя из времени начала встречи
+    let leftInPr;
+    let widthInPr;
+    if(document.documentElement.clientWidth > 850){
+     leftInPr =//считаем  значение left для встречи в процентах, исходя из времени начала встречи
       (this.props.start.getHours() +
         this.props.start.getMinutes() / 60 +
         this.props.start.getSeconds() / (60 * 60) -
         7.5) *
       6.4;
-    let widthInPr =//считаеи значение width для встречи в процентах, исходя из разности начала и конца встречи
+    widthInPr =//считаеи значение width для встречи в процентах, исходя из разности начала и конца встречи
       (this.props.end.getTime() - this.props.start.getTime()) / HOUR * 6.4;
+    }
+    else{
+      leftInPr =//считаем  значение left для встречи в процентах, исходя из времени начала встречи
+      (this.props.start.getHours() +
+        this.props.start.getMinutes() / 60 +
+        this.props.start.getSeconds() / (60 * 60) -
+        7.2) *
+      6.25;
+     widthInPr =//считаеи значение width для встречи в процентах, исходя из разности начала и конца встречи
+      (this.props.end.getTime() - this.props.start.getTime()) / HOUR * 6.3;
+    }
     let meetBlockStyle = {
       left: `${leftInPr}%`,
       width: `${widthInPr}%`,

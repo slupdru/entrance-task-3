@@ -6,6 +6,7 @@ import "../styles/new-meet-mobile.scss";
 import { Switch, Route } from "react-router-dom";
 import DelButtonInEdit from "./DelButtonInEdit";
 import FooterInNew from "./FooterInNew";
+// import ChangeRooms from "./ChangeRooms"
 import ModalEditMeet from "./ModalEditMeet";
 import FooterInEdit from "./FooterInEdit";
 import SelectRoomBlock from "./SelectRoomBlock";
@@ -405,8 +406,16 @@ class NewMeet extends React.Component {
   }
 
   _getMembUsers(value){
+    let valid = 0;
     for (let i = 0; i < this.props.data.users.length; i++) {
-      if (value === this.props.data.users[i].login) {
+      if ((value === this.props.data.users[i].login)) {
+        for (let j=0; j < this.state.usersInNewMeet.length; j++){
+          console.log(this.state.usersInNewMeet[j].id, this.props.data.users[i].id);
+          if (this.state.usersInNewMeet[j].id===this.props.data.users[i].id){
+            valid=-1;
+          }
+        }
+        if (valid===0){
         this.setState({
           usersInNewMeet: [
             ...this.state.usersInNewMeet,
@@ -414,6 +423,9 @@ class NewMeet extends React.Component {
           ]
         }, console.log(this.state.usersInNewMeet));
       }
+      break;
+    }
+
     }
   }
   sortR(a, b) {//сортировка переговорок по количеству пройденных этажей
@@ -445,6 +457,10 @@ class NewMeet extends React.Component {
     end.setMinutes(minutesEnd);
     return [start, end];
   }
+
+
+
+
 
   getRecomendation(rooms, nonval) {//рекомендованные встречи
     let [start, end] = this.setDate();
@@ -500,6 +516,7 @@ class NewMeet extends React.Component {
     rooms.end = `${this.state.endInput}`;
 
       if (delcount===rooms.length){
+
         return [];
       }
       else{
@@ -648,26 +665,9 @@ class NewMeet extends React.Component {
                   <div className="time">
                     <div
                       className="date"
-                      // {
-                      //   this.state.dateValid === true ||
-                      //   (this.state.dateInput === "" &&
-                      //     this.state.showError === false)
-                      //     ? `date`
-                      //     : `date input_valid_err`
-                      // }
                     >
                       <div className="theme_title">Дата</div>
-                      {/* <input
-                        className="date_input"
-                        id="dateInput"
-                        value={this.state.dateInput}
-                        onChange={this.handleChange}
-                        type="text"
-                      /> */}
                       <DatePickerMY dateNow={this.state.dateNow} dateStart={eventS!==undefined?eventS.dateStart:undefined}  changeDate={this.handleChangeDate}/>
-                      {/* <div className="input_error">
-                        Формат даты (dd.mm.yyyy)
-                      </div> */}
                     </div>
                     <div className="start-end">
                       <div
@@ -795,7 +795,7 @@ class NewMeet extends React.Component {
                             start={rooms.start}
                           /> 
                         )
-                        : <div>Вы не ввели данные или все переговорки на данное время заняты(</div>
+                        : <div className="valid-date">Вы не ввели данные, или все переговорки на данное время заняты(</div>
                       : rooms.length !== 0
                         ? <SelectRoomBlock
                             closeClick={this.handleCloseClick}
@@ -855,7 +855,7 @@ class NewMeet extends React.Component {
         </div>
       );
     } else {
-      return <div>Loading...</div>;
+      return <div className="load"><hr/><hr/><hr/><hr/></div>
     }
   }
 }
