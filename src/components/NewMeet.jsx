@@ -6,7 +6,7 @@ import "../styles/new-meet-mobile.scss";
 import { Switch, Route } from "react-router-dom";
 import DelButtonInEdit from "./DelButtonInEdit";
 import FooterInNew from "./FooterInNew";
-// import ChangeRooms from "./ChangeRooms"
+import ChangeRooms from "./ChangeRooms"
 import ModalEditMeet from "./ModalEditMeet";
 import FooterInEdit from "./FooterInEdit";
 import SelectRoomBlock from "./SelectRoomBlock";
@@ -77,7 +77,8 @@ class NewMeet extends React.Component {
       _month: new Date().getMonth(),//текущий месяц
       _dayNow: new Date().getDate(),//текущий день
       _year: new Date().getFullYear(),//текущий год
-      dateNow:-1
+      dateNow:-1,
+      changeNoRooms:[]
     };
     this._getMembUsers = this._getMembUsers.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -213,12 +214,14 @@ class NewMeet extends React.Component {
       }, ()=>console.log(this.state._dayNow));
     }
     else{
+    if (mom!==null){
     this.setState({
       _month:mom.month(),
       _dayNow:mom.date(),
       _year:mom.year()
     }, ()=>console.log(this.state._dayNow))
   }
+}
   }
   handleCloseClick() {//отменить выбор комнаты
     this.setState({
