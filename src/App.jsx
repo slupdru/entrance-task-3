@@ -13,7 +13,7 @@ class App extends React.Component {
     super(props);
   this.state = {
     dateNow: new Date()
-    // dkcjdcdijcddddddddd
+    // dkcjdcdijcdddd
   }
   this.handleChandeDate = this.handleChandeDate.bind(this);
   this.tick = this.tick.bind(this);
